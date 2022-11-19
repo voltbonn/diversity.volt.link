@@ -44,6 +44,11 @@ const _DATA_ = {
 		// your_city: {de: 'Deine Stadt:'},
 		// voluntary_metadata_description: {de: 'Jeweils das Land und/oder das Städteteam in dem du am aktivsten&nbsp;bist.'},
 
+		button_sourcecode: {
+			de: 'Den Quellcode kannst du auf GitHub anschauen.',
+			en: 'View the code on GitHub.',
+		},
+
 		button_to_privacy: {
 			de: 'Los geht\'s',
 			en: 'Let\'s start',
