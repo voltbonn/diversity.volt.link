@@ -145,14 +145,10 @@ function showClient(res, blocks = []) {
       res.send(index_file)
     }
   })
-
-  // The client needs to check if the block exists OR if a error page should be shown.
-  // AND the client should to correct the slug if it's wrong.
-  // (TODO: There currently is no function to find the correct slug from an id.)
 }
 
-app.get('/', async function (req, res, next) {
-  showClient(res) // call showClient to replace the default meta infos (__META_TITLE__, ...)
+app.get('/', function (req, res, next) {
+  showClient(res) // show index.html
 })
 
 app.use(express.static(static_files_path))
