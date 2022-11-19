@@ -15,11 +15,7 @@ const { sendInitialStats } = require('./stats.js')
 const fs = require('fs')
 const ObjectId = require('mongodb').ObjectId // just to check ObjectIDs
 
-const static_files_path = path.join(__dirname,
-  isDevEnvironment
-    ? '../volt.link-frontend/build/'
-    : '../volt.link-frontend/'
-)
+const static_files_path = path.join(__dirname, './frontend/')
 
 function checkOrigin(origin){
   return (
