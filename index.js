@@ -16,6 +16,9 @@ const fs = require('fs')
 const static_files_path = path.join(__dirname, './frontend/')
 const cache_folder_path = path.join(__dirname, './cache/')
 
+const volt_team_root_team_id = process.env.volt_team_root_team_id
+const volt_team_root_team_name = process.env.volt_team_root_team_name
+
 // create cache folder if it doesn't exist
 if (!fs.existsSync(cache_folder_path)) {
   fs.mkdirSync(cache_folder_path)
@@ -153,6 +156,65 @@ function showClient(res, blocks = []) {
   })
 }
 
+function getParentTeams(team_id, all_teams = []) {
+  const parents = []
+  const this_parent_id = all_teams.find(team => team.id === team_id).parent_id
+  const parent = all_teams.find(team => team.id === this_parent_id)
+
+  // check if parent exists in parents array
+  if (parent && !parents.find(team => team.id === parent.id)) {
+    parents.push(parent)
+    parents.push(...getParentTeams(parent.id, all_teams))
+  }
+
+  return parents
+}
+  
+
+function reshapeTeamData(teams) {
+
+  teams = teams
+    .filter(team => (
+      team.team_type === 'geographic' &&
+      !team.name.includes('Expats')
+    ))
+    .map(team => {
+      const name = team.name
+        .replace(/\([^()]*\)/g, '') // remove everything in brackets
+        .replace(/\s+/g, ' ') // remove double spaces
+        .trim()
+
+      return {
+        ...team,
+        name,
+        parent_team_ids: getParentTeams(team.id, teams), // .map(team => team.id),
+      }
+    })
+  
+  teams = teams
+    .map(team => {
+      return {
+        ...team,
+        parent_team_ids: team.parent_team_ids
+          .filter(parent_team => teams.find(team => team.id === parent_team.id))
+          .map(parent_team => parent_team.id),
+      }
+    })
+
+  const data = {
+    // administrative_levels: teams
+    //   .reduce((acc, team) => {
+    //     if (!acc.hasOwnProperty(team.administrative_level)) {
+    //       acc[team.administrative_level] = []
+    //     }
+    //     acc[team.administrative_level].push(team)
+    //     // acc[team.administrative_level] += 1
+    //     return acc
+    //   }, {}),
+    teams,
+  }
+  return data
+}
 
 app.get('/teams.json', function (req, res, next) {
 
@@ -162,20 +224,19 @@ app.get('/teams.json', function (req, res, next) {
   const cache_file_path = cache_folder_path + '/teams.json'
   if (fs.existsSync(cache_file_path)) {
     // return cached file
-    fs.readFile(cache_file_path, 'utf8', function (err, data) {
+    fs.readFile(cache_file_path, 'utf8', function (err, teams) {
       if (err) {
         console.error(err)
         res.sendStatus(500)
       } else {
-        res.send(data)
+        const data = reshapeTeamData(JSON.parse(teams))
+        res.json(data)
       }
     })
   } else {
 
     // get teams from volt.team api
 
-    const volt_team_root_team_id = process.env.volt_team_root_team_id
-    const volt_team_root_team_name = process.env.volt_team_root_team_name
     const url = `https://volt.team/api/v1/teams/${volt_team_root_team_id}/subteams?recursive=true`
 
     // fetch from the above url
@@ -190,22 +251,22 @@ app.get('/teams.json', function (req, res, next) {
       } else {
         response.json()
           .then(teams => {
-            teams.unshift({
-              id: 1 * volt_team_root_team_id,
-              name: volt_team_root_team_name,
-            })
+            teams = [
+              {
+                id: 1 * volt_team_root_team_id,
+                name: volt_team_root_team_name,
+                country: '',
+                team_type: 'geographic',
+                administrative_level: 'europe',
+              },
+              ...teams
+            ]
 
-            const data = {
-              teams: teams.map(team => ({
-                id: team.id,
-                name: team.name,
-              })),
-            }
-
+            const data = reshapeTeamData(teams)
             res.json(data)
 
             // save the data in a cache folder
-            fs.writeFile(cache_file_path, JSON.stringify(data), function (err) {
+            fs.writeFile(cache_file_path, JSON.stringify(teams), function (err) {
               if (err) {
                 console.error(err)
               }
