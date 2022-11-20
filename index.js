@@ -9,11 +9,17 @@ const http = require('http')
 const express = require('express')
 const rateLimit = require('express-rate-limit')
 
-// const { fetch } = require('cross-fetch')
+const { fetch } = require('cross-fetch')
 
 const fs = require('fs')
 
 const static_files_path = path.join(__dirname, './frontend/')
+const cache_folder_path = path.join(__dirname, './cache/')
+
+// create cache folder if it doesn't exist
+if (!fs.existsSync(cache_folder_path)) {
+  fs.mkdirSync(cache_folder_path)
+}
 
 // volt_team_api_key
 
@@ -146,6 +152,72 @@ function showClient(res, blocks = []) {
     }
   })
 }
+
+
+app.get('/teams.json', function (req, res, next) {
+
+  // todo reload the file every day once
+
+  // check if cache file exists
+  const cache_file_path = cache_folder_path + '/teams.json'
+  if (fs.existsSync(cache_file_path)) {
+    // return cached file
+    fs.readFile(cache_file_path, 'utf8', function (err, data) {
+      if (err) {
+        console.error(err)
+        res.sendStatus(500)
+      } else {
+        res.send(data)
+      }
+    })
+  } else {
+
+    // get teams from volt.team api
+
+    const volt_team_root_team_id = process.env.volt_team_root_team_id
+    const volt_team_root_team_name = process.env.volt_team_root_team_name
+    const url = `https://volt.team/api/v1/teams/${volt_team_root_team_id}/subteams?recursive=true`
+
+    // fetch from the above url
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${process.env.volt_team_api_key}`
+      }
+    }).then(response => {
+      if (response.status !== 200) {
+        res.sendStatus(500)
+      } else {
+        response.json()
+          .then(teams => {
+            teams.unshift({
+              id: 1 * volt_team_root_team_id,
+              name: volt_team_root_team_name,
+            })
+
+            const data = {
+              teams: teams.map(team => ({
+                id: team.id,
+                name: team.name,
+              })),
+            }
+
+            res.json(data)
+
+            // save the data in a cache folder
+            fs.writeFile(cache_file_path, JSON.stringify(data), function (err) {
+              if (err) {
+                console.error(err)
+              }
+            })
+          })
+      }
+    }).catch(error => {
+      console.error(error)
+      res.sendStatus(500)
+    })
+  }
+})
 
 app.get('/', function (req, res, next) {
   showClient(res) // show index.html
