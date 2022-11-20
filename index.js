@@ -179,10 +179,14 @@ function reshapeTeamData(teams) {
       !team.name.includes('Expats')
     ))
     .map(team => {
-      const name = team.name
+      let name = team.name
         .replace(/\([^()]*\)/g, '') // remove everything in brackets
         .replace(/\s+/g, ' ') // remove double spaces
         .trim()
+
+      if (name.toLowerCase().startsWith('volt ')) {
+        name = name.slice(5)
+      }
 
       return {
         ...team,
