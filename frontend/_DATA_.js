@@ -229,6 +229,35 @@ const _DATA_ = {
 			}
 		},
 		{
+			heading: { de: 'Diskriminierung' },
+			questions: {
+				discriminatory_experiences: {
+					question: { de: 'In welchen Bereichen hast du schonmal diskriminierende Erfahrungen gemacht?' },
+					// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
+					type: 'checkbox',
+					options: {
+						'ancestry': { de: 'Ethnische Herkunft oder Hauttyp' },
+						'sex_or_gender': { de: 'Geschlecht oder Gender' },
+						'sexual_orientation': { de: 'Sexuelle Orientierung' },
+						'age': { de: 'Alter' },
+						'disabilities': { de: 'Behinderung oder chronische Krankheit' },
+						'ideology': { de: 'Religion oder Weltanschauung' },
+						'classism': { de: 'Vermögen oder sozialen Herkunft' },
+						'other': { de: 'andere Bereiche' },
+					},
+				},
+				// discriminatory_experiences_within_volt: {
+				// 	question: {de: 'Hast diskriminierende Erfahrungen innerhalb von Volt gemacht?'},
+				// 	// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
+				// 	type: 'checkbox',
+				// 	options: {
+				// 		'yes': {de: 'Ja'},
+				// 		'no': {de: 'Nein'},
+				// 	},
+				// },
+			},
+		},
+		{
 			heading: { de: 'LGBTQ*' },
 			questions: {
 				gender: {
@@ -270,36 +299,6 @@ const _DATA_ = {
 						'terms_dont_fit': { de: 'Diese Begriffe passen nicht zu mir.' },
 					},
 				},
-			},
-		},
-		{
-			heading: { de: 'Diskriminierung' },
-			// Diskriminierung sollte hinter LGBTQ* sein, da wir dort den Begriff "Gender" erklären. (EN: Discrimination should be after LGBTQ*, cause we teach the term "gender" in it.)
-			questions: {
-				discriminatory_experiences: {
-					question: { de: 'In welchen Bereichen hast du schonmal diskriminierende Erfahrungen gemacht?' },
-					// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
-					type: 'checkbox',
-					options: {
-						'ancestry': { de: 'Ethnische Herkunft oder Hauttyp' },
-						'sex_or_gender': { de: 'Geschlecht oder Gender' },
-						'sexual_orientation': { de: 'Sexuelle Orientierung' },
-						'age': { de: 'Alter' },
-						'disabilities': { de: 'Behinderung oder chronische Krankheit' },
-						'ideology': { de: 'Religion oder Weltanschauung' },
-						'classism': { de: 'Vermögen oder sozialen Herkunft' },
-						'other': { de: 'andere Bereiche' },
-					},
-				},
-				// discriminatory_experiences_within_volt: {
-				// 	question: {de: 'Hast diskriminierende Erfahrungen innerhalb von Volt gemacht?'},
-				// 	// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
-				// 	type: 'checkbox',
-				// 	options: {
-				// 		'yes': {de: 'Ja'},
-				// 		'no': {de: 'Nein'},
-				// 	},
-				// },
 			},
 		},
 		{
