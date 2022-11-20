@@ -246,41 +246,41 @@ const _DATA_ = {
 						'other': { de: 'andere Bereiche' },
 					},
 				},
-				skin_tone: {
-					question: { de: 'Was ist dein Hauttyp?' },
-					why: { de: 'Wir gehen davon aus, dass Volt leider mehrheitlich männlich, akademisch und weiß ist. Das möchten wir hier genauer prüfen. Wir verweden hierzu die Fitzpatrick-Skala, die auch bei Emojis verwendet wird. Diese Orientiert sich daran, wie schnell man Sonnenbrand bekommt.' },
-					type: 'radio',
-					options: {
-						'1': {
-							de: ' 🏻 Typ I: brennt immer, bräunt sich nie (blass; Sommersprossen)',
-							en: ' 🏻 Typ I: always burns, never tans (palest; freckles)'
-						},
-						'2': {
-							de: ' 🏻 Typ II: brennt normalerweise, bräunt sich minimal',
-							en: ' 🏻 Typ II: usually burns, tans minimally (light colored but darker than fair)'
-						},
-						'3': {
-							de: ' 🏼 Typ III: manchmal leichte Verbrennungen, bräunt gleichmäßig',
-							en: ' 🏼 Typ III: sometimes mild burn, tans uniformly (golden honey or olive)'
-						},
-						'4': {
-							de: ' 🏽 Typ IV: brennt minimal, bräunt sich immer gut (mäßig braun)',
-							en: ' 🏽 Typ IV: burns minimally, always tans well (moderate brown)'
-						},
-						'5': {
-							de: ' 🏾 Typ V: brennt sehr selten, bräunt sich sehr leicht (dunkelbraun)',
-							en: ' 🏾 Typ V: very rarely burns, tans very easily (dark brown)'
-						},
-						'6': {
-							de: ' 🏿 Typ VI: brennt niemals (tief pigmentiertes Dunkelbraun bis dunkelstes Braun)',
-							en: ' 🏿 Typ VI: never burns (deeply pigmented dark brown to darkest brown)'
-						},
-						'not_sure': {
-							de: 'Ich bin mir nicht sicher.',
-							en: 'I am not sure.'
-						},
-					},
-				},
+				// skin_tone: {
+				// 	question: { de: 'Was ist dein Hauttyp?' },
+				// 	why: { de: 'Wir gehen davon aus, dass Volt leider mehrheitlich männlich, akademisch und weiß ist. Das möchten wir hier genauer prüfen. Wir verweden hierzu die Fitzpatrick-Skala, die auch bei Emojis verwendet wird. Diese Orientiert sich daran, wie schnell man Sonnenbrand bekommt.' },
+				// 	type: 'radio',
+				// 	options: {
+				// 		'1': {
+				// 			de: ' 🏻 Typ I: brennt immer, bräunt sich nie (blass; Sommersprossen)',
+				// 			en: ' 🏻 Typ I: always burns, never tans (palest; freckles)'
+				// 		},
+				// 		'2': {
+				// 			de: ' 🏻 Typ II: brennt normalerweise, bräunt sich minimal',
+				// 			en: ' 🏻 Typ II: usually burns, tans minimally (light colored but darker than fair)'
+				// 		},
+				// 		'3': {
+				// 			de: ' 🏼 Typ III: manchmal leichte Verbrennungen, bräunt gleichmäßig',
+				// 			en: ' 🏼 Typ III: sometimes mild burn, tans uniformly (golden honey or olive)'
+				// 		},
+				// 		'4': {
+				// 			de: ' 🏽 Typ IV: brennt minimal, bräunt sich immer gut (mäßig braun)',
+				// 			en: ' 🏽 Typ IV: burns minimally, always tans well (moderate brown)'
+				// 		},
+				// 		'5': {
+				// 			de: ' 🏾 Typ V: brennt sehr selten, bräunt sich sehr leicht (dunkelbraun)',
+				// 			en: ' 🏾 Typ V: very rarely burns, tans very easily (dark brown)'
+				// 		},
+				// 		'6': {
+				// 			de: ' 🏿 Typ VI: brennt niemals (tief pigmentiertes Dunkelbraun bis dunkelstes Braun)',
+				// 			en: ' 🏿 Typ VI: never burns (deeply pigmented dark brown to darkest brown)'
+				// 		},
+				// 		'not_sure': {
+				// 			de: 'Ich bin mir nicht sicher.',
+				// 			en: 'I am not sure.'
+				// 		},
+				// 	},
+				// },
 				// discriminatory_experiences_within_volt: {
 				// 	question: {de: 'Hast diskriminierende Erfahrungen innerhalb von Volt gemacht?'},
 				// 	// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
