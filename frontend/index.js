@@ -15,7 +15,14 @@ console.info('%c \n Be yourself! \n\n', `
     7px 7px #3e0099,
     8px 8px #8f008f;
 `)
-    
+
+const teams = []
+const teams_selected = []
+const teams_selected_automatically = []
+
+
+
+
 const CloudFunctionsPrefix = 'https://us-central1-volt-4eca0.cloudfunctions.net/save_formdata'
 
 
@@ -569,7 +576,7 @@ const buttons_to_page = document.querySelectorAll('button[to-page]')
 for (const button of buttons_to_page) {
 	button.addEventListener('click', () => {
 		const toPage = button.getAttribute('to-page')
-		if (!['', 'intro', 'privacy', 'questions'].includes(toPage)) {
+		if (!['', 'intro', 'privacy', 'metadata', 'questions'].includes(toPage)) {
 			toPage = ''
 		}
 		body.setAttribute('show', toPage)

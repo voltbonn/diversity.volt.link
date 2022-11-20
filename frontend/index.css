@@ -8,7 +8,7 @@
 	--volt-purple: #502379;
 	--volt-yellow: #FDC220;
 	--volt-red: #E63E12;
-	--volt-blur: #82D0F4;
+	--volt-blue: #82D0F4;
 	--volt-green: #1BBE6F;
 
 	--page-width: 800px;
@@ -78,9 +78,9 @@ a:hover {
 	.block_wrapper,
 	.block_left,
 	.block_right {
-display: block;
-width: 100%;
-margin: 0;
+		display: block;
+		width: 100%;
+		margin: 0;
 	}
 }
 
@@ -112,9 +112,14 @@ margin: 0;
 	background: var(--volt-purple);
 }
 
-.page.orange_bg {
+.page.red_bg {
 	color: black;
 	background: var(--volt-red);
+}
+
+.page.blue_bg {
+	color: black;
+	background: var(--volt-blue);
 }
 
 .page .pageContent {
@@ -188,7 +193,8 @@ h1 {
 }
 
 .page.violet_bg h1,
-.page.orange_bg h1 {
+.page.red_bg h1,
+.page.blue_bg h1 {
 	color: var(--on-dark-color);
 }
 
@@ -300,7 +306,7 @@ p {
 	color: var(--on-light-color);
 }
 
-.markedText.black_on_orange {
+.markedText.black_on_red {
 	background-color: var(--volt-red);
 	color: var(--on-light-color);
 }
@@ -546,7 +552,8 @@ button {
 	color: var(--volt-purple);
 }
 
-.page.orange_bg button {
+.page.red_bg button,
+.page.blue_bg button {
 	background: var(--light-color);
 	color: var(--on-light-color);
 }
@@ -673,9 +680,64 @@ body.success .submitWrapper {
 	}
 }*/
 
+.chip {
+	position: relative;
+	background: white;
+  padding: 10px 20px;
+  border-radius: 100px;
+  display: inline-block;
+  margin: 5px 0 0 0;
+}
+.chip.add,
+.chip.remove {
+  padding-right: 40px;
+	cursor: pointer;
+}
+.chip.add::after,
+.chip.remove::after {
+  content: '+';
+  color: var(--volt-green);
+  font-size: 2rem;
+  font-weight: 100;
+  display: block;
+  position: absolute;
+  top: -5px;
+  right: 10px;
+}
+.chip.add::before,
+.chip.remove::before {
+  content: '';
+  background: var(--volt-green);
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+	bottom: 0;
+	left: 0;
+	border-radius: 100px;
+	opacity: 0;
+}
+.chip.remove:hover::before {
+  background: var(--volt-red);
+}
+.chip.add:hover::before,
+.chip.remove:hover::before {
+	opacity: 0.1;
+}
+.chip.remove::after {
+	content: '+';
+	transform: rotateZ(45deg);
+	color: var(--volt-red);
+}
+.chip.automatic {
+  opacity: 0.6;
+	cursor: not-allowed;
+}
+
 body[show=""] .page[page="intro"],
 body[show="intro"] .page[page="intro"],
 body[show="privacy"] .page[page="privacy"],
+body[show="metadata"] .page[page="metadata"],
 body[show="questions"] .page[page="questions"] {
 	display: block;
 }

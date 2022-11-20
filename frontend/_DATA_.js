@@ -27,7 +27,7 @@ const _DATA_ = {
 			`,
 		},
 		//website_privacy: {de:`
-		//	<span class="markedText dark_on_light">Da uns <strong class="markedText black_on_orange">Privatsphäre</strong> wichtig ist, werden die Antworten jeweils zur Frage gruppiert gespeichert, sodass die hier eingegebenen Daten <strong>nicht auf dich zurückführbar</strong> sind.</span>
+		//	<span class="markedText dark_on_light">Da uns <strong class="markedText black_on_red">Privatsphäre</strong> wichtig ist, werden die Antworten jeweils zur Frage gruppiert gespeichert, sodass die hier eingegebenen Daten <strong>nicht auf dich zurückführbar</strong> sind.</span>
 		//
 		//	<span class="markedText light_on_dark">Zu den einzelnen Datensätzen werden nur die im folgenden Kasten genannten Metadaten gespeichert.</span>
 		//
@@ -90,15 +90,32 @@ const _DATA_ = {
 				If you have any questions about this survey, please contact <a target="_blank" href="mailto:thomas.rosen@volteuropa.org">thomas.rosen@volteuropa.org</a>.
 			`,
 		},
+		button_to_metadata: {
+			de: 'Teams und Metadaten auswählen',
+			en: 'Select teams and metadata',
+		},
+
+		metadata_heading: {
+			de: 'Metadaten',
+			en: 'Metadata',
+		},
+		metadata_description: {
+			de: `Hier kannst du auswählen zu welchen Teams deine Antworten zählen sollen. Du kannst mehrere Local-Teams auswählen.
+			
+			Die Daten werden zu jedem Team einzeln gespeichert. So können die Daten weniger auf dich zurückgeführt werden.
+			
+			Die Daten werden automatisch auch zu den übergeordnten Teams gespeichert. Zum Beispiel werden die Daten zu den Local-Teams auch zu den Regional- und Nationalen-Teams und zu Volt Europa gespeichert.`,
+			en: `Here you can select which teams your answers should count for. You can select multiple local teams.
+			
+			The data will be saved separately for each team. This way the data can be less attributed to you.
+
+			The data will automatically also be saved for the higher-level teams. For example, the data for the local teams will also be saved for the regional- and national-teams and Volt Europe.`,
+		},
 		button_to_questions: {
 			de: 'Zu den Fragen',
 			en: 'To the questions',
 		},
 
-		metadata_is_this_the_first_completion: {
-			de: 'Nimmst du das erste Mal an der Umfrage teil?',
-			en: 'Is this your first time participating in the survey?',
-		},
 		button_send_to_volt: {
 			de: 'An Volt senden',
 			en: 'Send to Volt',
@@ -123,29 +140,6 @@ const _DATA_ = {
 		},
 	},
 	sections: [
-		{
-			heading: {
-				de: 'Metadaten',
-				en: 'Metadata',
-			},
-			questions: {
-				metadata_country: {
-					question: {
-						de: 'Dein Land',
-						en: 'Your country',
-					},
-					type: 'chooser',
-					options: {},
-				},
-				metadata_city: {
-					question: {
-						de: 'Dein Städteteam',
-						en: 'Your cityteam',
-					},
-					type: 'one_line_text',
-				},
-			}
-		},
 		{
 			heading: {
 				de: 'Bildung',

@@ -35,7 +35,6 @@
 	<script type="text/javascript" src="./jsSHA/src/sha3.js" defer></script>
 	<script type="text/javascript" src="./scripts/async.min.js" defer></script>
 	<script type="text/javascript" src="./scripts/css_browser_selector.js" defer></script>
-	<script type="text/javascript" src="./_DATA_.js" defer></script>
 
 	<link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
 
@@ -105,7 +104,7 @@
 		</div>
 	</div>
 
-	<div class="page orange_bg" page="privacy">
+	<div class="page red_bg" page="privacy">
 		<div class="pageContent" style="padding-top:64px;">
 			<h1 class="website_heading" data-translation-key="heading_privacy"></h1>
 
@@ -121,11 +120,52 @@
 					</p>
 				</div>
 				<div class="block_right">
-					<p style="padding-top:48px;opacity:0.8;font-size:16px;line-height:1.2;display: block;"
+					<p style="padding-top:48px;font-size:16px;line-height:1.2;display: block;"
 						data-translation-key="privacy_details"></p>
 				</div>
 			</div>
 
+			<button to-page="metadata" style="margin-top:64px;"><span data-translation-key="button_to_metadata"></span>
+				<span class="arrow"></span></button>
+		</div>
+	</div>
+
+	<div class="page blue_bg" page="metadata">
+		<div class="pageContent" style="padding-top:64px;">
+			<h1 class="website_heading" data-translation-key="metadata_heading"></h1>
+	
+			<div class="block_wrapper" style="margin-top:32px;">
+				<div class="block_left" style="padding-top:48px;">
+					<p style="font-size:16px;line-height:1.2;display: block;"
+						data-translation-key="metadata_description"></p>
+				</div>
+				<div class="block_right" style="font-weight:bold;padding-top:48px;">
+					<input
+						type="text"
+						id="team_search"
+						placeholder="Bonn"
+						style="border-color: currentColor;"
+					/>
+
+					<div id="team_suggestions">
+						<div class="chip add">Bonn</div>
+						<div class="chip add">Berlin</div>
+					</div>
+
+					<br />
+
+					<div id="teams_selected">
+						<div class="chip remove">Bonn</div>
+						<div class="chip remove">Berlin</div>
+					</div>
+					<div id="teams_selected_automaticly">
+						<div class="chip automatic">Bonn</div>
+						<div class="chip automatic">Berlin</div>
+					</div>
+					
+				</div>
+			</div>
+	
 			<button to-page="questions" style="margin-top:64px;"><span data-translation-key="button_to_questions"></span>
 				<span class="arrow"></span></button>
 		</div>
@@ -139,14 +179,7 @@
 			<div style="margin-bottom: 128px;">
 
 				<div class="submitWrapper">
-					<label class="radio_or_checkbox_label" style="display:flex;align-items: center;width:450px;max-width:100%;">
-						<input id="metadataIsFirstCompletion" type="checkbox" />
-						<strong style="text-align:left; padding-bottom:1px; line-height:1.1;"
-							data-translation-key="metadata_is_this_the_first_completion"></strong>
-					</label>
-
-					<button class="green" id="submitButton"><span data-translation-key="button_send_to_volt"></span><span
-							class="arrow"></span></button>
+					<button class="green" id="submitButton"><span data-translation-key="button_send_to_volt"></span><span class="arrow"></span></button>
 				</div>
 				<p class="message saving" data-translation-key="saving"></p>
 				<p class="message success" data-translation-key="success"></p>
@@ -155,6 +188,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="./index.js" defer></script>
+	<script type="text/javascript" src="./index.js"></script>
+	<script type="text/javascript" src="./_DATA_.js"></script>
 </body>
 </html>
