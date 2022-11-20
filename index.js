@@ -194,7 +194,8 @@ function reshapeTeamData(teams) {
   teams = teams
     .map(team => {
       return {
-        ...team,
+        id: team.id,
+        name: team.name,
         parent_team_ids: team.parent_team_ids
           .filter(parent_team => teams.find(team => team.id === parent_team.id))
           .map(parent_team => parent_team.id),
