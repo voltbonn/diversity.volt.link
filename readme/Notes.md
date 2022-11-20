@@ -227,6 +227,8 @@ https://unstats.un.org/unsd/methodology/dataquality/references/1902216-UNNQAFMan
 
 https://unstats.un.org/unsd/classifications/unsdclassifications/
 
+https://zy-precision.com/13-top-demografische-umfrage-fragen-die-sie-verwenden-sollten/
+
 ## Fact Sheets
 https://www.who.int/news-room/fact-sheets/
 
