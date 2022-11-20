@@ -1,3 +1,21 @@
+
+// Just to make the console a bit queer.
+console.info('%c \n Be yourself! \n\n', `
+  font-family: Ubuntu, sans-serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow:
+    1px 1px #ff69b5,
+    2px 2px #ff0000,
+    3px 3px #ff8f00,
+    4px 4px #ffff00,
+    5px 5px #008f00,
+    6px 6px #00c1c1,
+    7px 7px #3e0099,
+    8px 8px #8f008f;
+`)
+    
 const CloudFunctionsPrefix = 'https://us-central1-volt-4eca0.cloudfunctions.net/save_formdata'
 
 
