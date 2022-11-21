@@ -668,12 +668,15 @@ body.success .submitWrapper {
   border-radius: 100px;
   display: inline-block;
   margin: 5px 0 0 0;
+	font-weight: bold;
+	flex-shrink: 0;
 }
 .chip.add,
 .chip.remove {
   padding-right: 40px;
 	cursor: pointer;
 }
+
 .chip.add::after,
 .chip.remove::after {
   content: '+';
@@ -685,6 +688,12 @@ body.success .submitWrapper {
   top: -5px;
   right: 10px;
 }
+.chip.remove::after {
+	transform: rotateZ(45deg);
+	color: var(--volt-red);
+	margin-top: 2px;
+}
+
 .chip.add::before,
 .chip.remove::before {
   content: '';
@@ -705,14 +714,17 @@ body.success .submitWrapper {
 .chip.remove:hover::before {
 	opacity: 0.1;
 }
-.chip.remove::after {
-	content: '+';
-	transform: rotateZ(45deg);
-	color: var(--volt-red);
-}
+
 .chip.automatic {
   opacity: 0.6;
 	cursor: not-allowed;
+}
+
+.chip_box {
+	margin: -5px;
+}
+.chip_box .chip {
+	margin: 5px;
 }
 
 body[show=""] .page[page="intro"],

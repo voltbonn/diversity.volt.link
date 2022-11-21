@@ -143,25 +143,31 @@
 
 					<input
 						type="text"
-						id="team_search"
+						id="team_suggestions_input"
 						placeholder="Bonn"
 						style="border-color: currentColor;"
+						oninput="renderTeamSuggestions()"
 					/>
 
-					<div id="team_suggestions">
+					<div
+						id="team_suggestions"
+						style="
+							white-space: nowrap;
+							overflow: auto;
+							display: flex;
+							gap: 5px;
+						"
+					>
 						<div class="chip add">Bonn</div>
 						<div class="chip add">Berlin</div>
 					</div>
 
 					<br />
+					<h3 data-translation-key="metadata_team_search_description-">Ausgewählte Teams:</h3>
 
-					<div id="teams_selected">
-						<div class="chip remove">Bonn</div>
-						<div class="chip remove">Berlin</div>
-					</div>
-					<div id="teams_selected_automaticly">
-						<div class="chip automatic">Bonn</div>
-						<div class="chip automatic">Berlin</div>
+					<div class="chip_box">
+						<span id="teams_selected"></span><!--
+						--><span id="teams_selected_automatically"></span>
 					</div>
 					
 				</div>

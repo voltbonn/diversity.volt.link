@@ -16,12 +16,118 @@ console.info('%c \n Be yourself! \n\n', `
     8px 8px #8f008f;
 `)
 
-const teams = []
-const teams_selected = []
-const teams_selected_automatically = []
+let teams = []
+let teams_selected = new Set()
+
+function selectTeam(team) {
+	teams_selected.add(team)
+	renderTeamSuggestions()
+	renderTeamSelected()
+	renderTeamSelectedAutomatically()
+}
+function deselectTeam(team) {
+	teams_selected = new Set([...teams_selected].filter(team_selected => team_selected.id !== team))
+	renderTeamSuggestions()
+	renderTeamSelected()
+	renderTeamSelectedAutomatically()
+}
+function renderTeamSuggestions() {
+	const team_suggestions_input = document.getElementById('team_suggestions_input')
+	const team_suggestions = document.getElementById('team_suggestions')
+	team_suggestions.innerHTML = ''
+
+	const team_suggestions_input_value = team_suggestions_input.value.toLowerCase()
 
 
+	// filter out parent_teams that are in the teams array
+	const teams_selected_ids = [...teams_selected]
+		.flatMap(team => [
+			team.id,
+			// ...team.parent_team_ids,
+		])
 
+	const filtered_teams = teams
+		.filter(team => !teams_selected_ids.includes(team.id))
+		.filter(team => team.name.toLowerCase().includes(team_suggestions_input_value))
+		.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+
+	for (const team of filtered_teams) {
+		const team_chip = document.createElement('div')
+		team_chip.classList.add('chip')
+		team_chip.classList.add('add')
+		team_chip.innerHTML = team.name
+		team_chip.addEventListener('click', () => {
+			selectTeam(team)
+		})
+		team_suggestions.appendChild(team_chip)
+	}
+}
+function renderTeamSelected() {
+	const teams_selected_node = document.getElementById('teams_selected')
+	teams_selected_node.innerHTML = ''
+
+	const filtered_teams = [...teams_selected]
+		.sort((a, b) => {
+			return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+		})
+
+	for (const team of filtered_teams) {
+		const team_chip = document.createElement('div')
+		team_chip.classList.add('chip')
+		team_chip.classList.add('remove')
+		team_chip.innerHTML = team.name
+		team_chip.addEventListener('click', () => {
+			deselectTeam(team.id)
+		})
+		teams_selected_node.appendChild(team_chip)
+	}
+}
+function getParentTeams(parent_team_ids) {
+	let parent_teams = []
+
+	for (const parent_team_id of parent_team_ids) {
+		const team = teams.find(team => team.id === parent_team_id)
+		if (team) {
+			parent_teams.push(team)
+		}
+	}
+
+	// filter out parent_teams that are in the teams array
+	const teams_selected_ids = [...teams_selected].map(team => team.id)
+	parent_teams = parent_teams.filter(parent_team => !teams_selected_ids.includes(parent_team.id))
+
+	return parent_teams
+}
+function renderTeamSelectedAutomatically() {
+	const teams_selected_node = document.getElementById('teams_selected_automatically')
+	teams_selected_node.innerHTML = ''
+
+	const parent_teams = getParentTeams([...new Set([...teams_selected].flatMap(team => team.parent_team_ids))])
+		.sort((a, b) => {
+			return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+		})
+
+	for (const team of parent_teams) {
+		const team_chip = document.createElement('div')
+		team_chip.classList.add('chip')
+		team_chip.classList.add('automatic')
+		team_chip.innerHTML = team.name
+		teams_selected_node.appendChild(team_chip)
+	}
+}
+function loadTeams() {
+	// load teams from ./teams.json
+	fetch('./teams.json')
+		.then(response => response.json())
+		.then(data => {
+			teams = data.teams
+			renderTeamSuggestions()
+		})
+		.catch(error => {
+			console.error(error)
+		})
+}
+loadTeams()
 
 const CloudFunctionsPrefix = 'https://us-central1-volt-4eca0.cloudfunctions.net/save_formdata'
 
