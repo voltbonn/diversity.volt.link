@@ -404,7 +404,7 @@ input.inline {
 }
 
 label.languageChooserWrapper {
-	margin: 32px 0 64px 0;
+	margin: 32px 0 16px 0;
 	display: flex;
 	align-items: center;
 	background: white;
