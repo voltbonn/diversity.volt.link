@@ -91,8 +91,8 @@ const _DATA_ = {
 			`,
 		},
 		button_to_metadata: {
-			de: 'Metadaten',
-			en: 'Metadata',
+			de: 'Teams + Metadaten',
+			en: 'Teams + Metadata',
 		},
 
 		metadata_heading: {
