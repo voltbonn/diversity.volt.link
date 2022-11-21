@@ -721,6 +721,16 @@ languageChooserSelect.addEventListener('change', e => {
 	}
 })
 
+function selectLanguageInSelector() {
+	const optionEles = languageChooserSelect.querySelectorAll('option')
+	for (let optionEle of optionEles) {
+		if (optionEle.value === window._language_) {
+			optionEle.selected = true
+		} else {
+			optionEle.selected = false
+		}
+	}
+}
 function checkUrl() {
 
 	// check hash
@@ -738,7 +748,8 @@ function checkUrl() {
 	const locationSearchObj = parseQuery(window.location.search)
 
 	// set language
-	window._language_ = locationSearchObj.lang || 'de'
+	window._language_ = locationSearchObj.lang || 'en'
+	selectLanguageInSelector()
 	updateLanguageTexts()
 
 }
