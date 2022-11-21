@@ -141,7 +141,6 @@ margin: 32px 0 0 0;
 	display: inline-block;
 	color: var(--volt-purple) !important;
 	margin-top: 32px;
-	margin-bottom: 86px;
 
 	transition: top 0.2s ease, margin-bottom 0.2s ease;
 }
