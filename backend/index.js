@@ -13,8 +13,8 @@ const { fetch } = require('cross-fetch')
 
 const fs = require('fs')
 
-const static_files_path = path.join(__dirname, './frontend/')
-const cache_folder_path = path.join(__dirname, './cache/')
+const static_files_path = path.join(__dirname, '../frontend/')
+const cache_folder_path = path.join(__dirname, '../cache/')
 
 const volt_team_root_team_id = process.env.volt_team_root_team_id
 const volt_team_root_team_name = process.env.volt_team_root_team_name
@@ -23,6 +23,7 @@ const volt_team_root_team_name = process.env.volt_team_root_team_name
 if (!fs.existsSync(cache_folder_path)) {
   fs.mkdirSync(cache_folder_path)
 }
+
 
 // volt_team_api_key
 
