@@ -171,8 +171,7 @@ function getParentTeams(team_id, all_teams = []) {
   }
 
   return parents
-}
-  
+}  
 
 function reshapeTeamData(teams) {
 
