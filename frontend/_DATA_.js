@@ -113,9 +113,15 @@ const _DATA_ = {
 		},
 		metadata_team_search_heading: {
 			de: 'Deine Local Teams',
+			en: 'Your Local Teams',
 		},
 		metadata_team_search_description: {
 			de: 'Suche hier nach deinem Local- / City-Team.',
+			en: 'Search for your local / city team here.',
+		},
+		metadata_selected_teams: {
+			de: 'Ausgewählte Teams:',
+			en: 'Selected teams:',
 		},
 		button_to_questions: {
 			de: 'Zu den Fragen',
