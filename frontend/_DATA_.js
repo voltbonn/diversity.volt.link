@@ -91,8 +91,8 @@ const _DATA_ = {
 			`,
 		},
 		button_to_metadata: {
-			de: 'Teams und Metadaten auswählen',
-			en: 'Select teams and metadata',
+			de: 'Metadaten',
+			en: 'Metadata',
 		},
 
 		metadata_heading: {
