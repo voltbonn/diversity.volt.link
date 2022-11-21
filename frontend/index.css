@@ -53,34 +53,15 @@ a:hover {
 }
 
 .block_wrapper {
-	display: flex;
-	margin: 0;
-}
-
-.block_left,
-.block_right {
-	width: 50%;
-
-	display: inline-block;
-	vertical-align: top;
-}
-
-.block_left {
-	margin: 0 32px 0 0;
-}
-
-.block_right {
-	margin: 0 0 0 32px;
+	display: grid;
+	gap: 32px;
+	grid-template-columns: repeat(2,minmax(40%,1fr));
+	margin-block-start: 64px;
 }
 
 @media (max-width: 700px) {
-
-	.block_wrapper,
-	.block_left,
-	.block_right {
-		display: block;
-		width: 100%;
-		margin: 0;
+	.block_wrapper {
+		grid-template-columns: 100%;
 	}
 }
 
