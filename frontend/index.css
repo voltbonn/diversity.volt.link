@@ -151,7 +151,7 @@ margin: 32px 0 0 0;
 }
 
 .website_description {
-	margin-top: 16px;
+	/* margin-top: 16px; */
 
 	transition: margin-top 0.2s ease;
 }
@@ -405,17 +405,18 @@ input.inline {
 }
 
 label.languageChooserWrapper {
-	margin-top: 64px;
+	margin: 32px 0 64px 0;
 	display: flex;
 	align-items: center;
 	background: white;
-	color: black;
 	min-height: 64px;
 	padding: 0;
 	/*font-size: 1rem;*/
 	/*font-family: "Ubuntu", "Helvetica", "Arial", sans-serif;*/
 	outline: none;
 	cursor: pointer;
+	color: var(--volt-purple);
+	font-weight: bold;
 }
 
 label.languageChooserWrapper .labelText {
@@ -428,6 +429,8 @@ label.languageChooserWrapper select {
 	padding: 0 0 0 121px;
 	margin-left: -84px;
 	background: transparent;
+	color: inherit;
+	font-weight: inherit;
 }
 
 .radio_or_checkbox_label {
