@@ -48,6 +48,10 @@ const _DATA_ = {
 			de: 'Den Quellcode kannst du auf GitHub anschauen.',
 			en: 'View the code on GitHub.',
 		},
+		button_imprint: {
+			de: 'Impressum',
+			en: 'Imprint',
+		},
 
 		button_to_privacy: {
 			de: 'Los geht\'s',
