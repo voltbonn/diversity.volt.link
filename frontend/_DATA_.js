@@ -111,6 +111,12 @@ const _DATA_ = {
 
 			The data will automatically also be saved for the higher-level teams. For example, the data for the local teams will also be saved for the regional- and national-teams and Volt Europe.`,
 		},
+		metadata_team_search_heading: {
+			de: 'Deine Local Teams',
+		},
+		metadata_team_search_description: {
+			de: 'Suche hier nach deinem Local- / City-Team.',
+		},
 		button_to_questions: {
 			de: 'Zu den Fragen',
 			en: 'To the questions',
