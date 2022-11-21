@@ -38,28 +38,29 @@ function renderTeamSuggestions() {
 
 	const team_suggestions_input_value = team_suggestions_input.value.toLowerCase()
 
+	if (team_suggestions_input_value.length > 0) {
+		// filter out parent_teams that are in the teams array
+		const teams_selected_ids = [...teams_selected]
+			.flatMap(team => [
+				team.id,
+				// ...team.parent_team_ids,
+			])
 
-	// filter out parent_teams that are in the teams array
-	const teams_selected_ids = [...teams_selected]
-		.flatMap(team => [
-			team.id,
-			// ...team.parent_team_ids,
-		])
+		const filtered_teams = teams
+			.filter(team => !teams_selected_ids.includes(team.id))
+			.filter(team => team.name.toLowerCase().includes(team_suggestions_input_value))
+			.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
 
-	const filtered_teams = teams
-		.filter(team => !teams_selected_ids.includes(team.id))
-		.filter(team => team.name.toLowerCase().includes(team_suggestions_input_value))
-		.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
-
-	for (const team of filtered_teams) {
-		const team_chip = document.createElement('div')
-		team_chip.classList.add('chip')
-		team_chip.classList.add('add')
-		team_chip.innerHTML = team.name
-		team_chip.addEventListener('click', () => {
-			selectTeam(team)
-		})
-		team_suggestions.appendChild(team_chip)
+		for (const team of filtered_teams) {
+			const team_chip = document.createElement('div')
+			team_chip.classList.add('chip')
+			team_chip.classList.add('add')
+			team_chip.innerHTML = team.name
+			team_chip.addEventListener('click', () => {
+				selectTeam(team)
+			})
+			team_suggestions.appendChild(team_chip)
+		}
 	}
 }
 function renderTeamSelected() {
@@ -70,6 +71,13 @@ function renderTeamSelected() {
 		.sort((a, b) => {
 			return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
 		})
+
+	const selected_teams_wrapper_node = document.getElementById('selected_teams_wrapper')
+	if (filtered_teams.length === 0) {
+		selected_teams_wrapper_node.style.display = 'none'
+	} else {
+		selected_teams_wrapper_node.style.display = 'block'
+	}
 
 	for (const team of filtered_teams) {
 		const team_chip = document.createElement('div')
@@ -127,7 +135,13 @@ function loadTeams() {
 			console.error(error)
 		})
 }
-loadTeams()
+function initTeams() {
+	loadTeams()
+	renderTeamSuggestions()
+	renderTeamSelected()
+	renderTeamSelectedAutomatically()
+}
+initTeams()
 
 const CloudFunctionsPrefix = 'https://us-central1-volt-4eca0.cloudfunctions.net/save_formdata'
 

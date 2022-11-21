@@ -721,10 +721,10 @@ body.success .submitWrapper {
 }
 
 .chip_box {
-	margin: -5px;
+	margin: -4px;
 }
 .chip_box .chip {
-	margin: 5px;
+	margin: 4px;
 }
 
 body[show=""] .page[page="intro"],
