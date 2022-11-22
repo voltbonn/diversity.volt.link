@@ -529,7 +529,7 @@ try {
 		module.exports = _DATA_
 	}
 } catch (error) {
-	if (!!_DATA_GOT_LOADED) {
+	if (window.hasOwnProperty('_DATA_GOT_LOADED') && typeof window._DATA_GOT_LOADED === 'function') {
 		_DATA_GOT_LOADED()
 	}
 }
