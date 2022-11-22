@@ -124,8 +124,8 @@ function renderTeamSelectedAutomatically() {
 	}
 }
 function loadTeams() {
-	// load teams from ./teams.json
-	fetch('./teams.json')
+	// load teams from ./api/teams.json
+	fetch('./api/teams.json')
 		.then(response => response.json())
 		.then(data => {
 			teams = data.teams

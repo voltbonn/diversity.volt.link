@@ -223,7 +223,7 @@ function reshapeTeamData(teams) {
   return data
 }
 
-app.get('/teams.json', function (req, res, next) {
+app.get('/api/teams.json', function (req, res, next) {
 
   // todo reload the file every day once
 
