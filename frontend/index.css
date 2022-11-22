@@ -510,8 +510,8 @@ label.languageChooserWrapper select {
 
 .radio_or_checkbox_label input[type="checkbox"]:checked,
 .radio_or_checkbox_label input[type="radio"]:checked {
-	background: var(--volt-green);
-	border: 3px solid var(--volt-green);
+	background: var(--volt-purple);
+	border: 3px solid var(--volt-purple);
 }
 
 .radio_or_checkbox_label input[type="checkbox"]:before,
@@ -521,8 +521,8 @@ label.languageChooserWrapper select {
 	top: -3px;
 	right: 0;
 	bottom: 0;
-	left: 0;
-	font-size: 32px;
+	left: 0px;
+	font-size: 26px;
 	line-height: 32px;
 	text-align: center;
 	color: white;
