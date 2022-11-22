@@ -63,6 +63,11 @@ a:hover {
 	.block_wrapper {
 		grid-template-columns: 100%;
 	}
+
+	.text_button_link {
+		display: block;
+		padding: 16px 0;
+	}
 }
 
 .page {
