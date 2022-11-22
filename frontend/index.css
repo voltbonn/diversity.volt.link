@@ -93,7 +93,7 @@ a:hover {
 	display: block;
 }
 
-.page.violet_bg {
+.page.purple_bg {
 	color: white;
 	background: var(--volt-purple);
 }
@@ -177,7 +177,7 @@ h1 {
 	transition: font-size 0.2s ease;
 }
 
-.page.violet_bg h1,
+.page.purple_bg h1,
 .page.red_bg h1,
 .page.blue_bg h1 {
 	color: var(--on-dark-color);
@@ -535,7 +535,7 @@ button {
 	transition: opacity 0.2s ease;
 }
 
-.page.violet_bg button {
+.page.purple_bg button {
 	background: var(--light-color);
 	color: var(--volt-purple);
 }
