@@ -16,6 +16,22 @@ console.info('%c \n Be yourself! \n\n', `
     8px 8px #8f008f;
 `)
 
+
+
+// GET HTML ELEMENTS ONCE
+
+const body = document.getElementsByTagName('body')[0]
+const websiteTitle = document.getElementById('websiteTitle')
+const languageChooserSelect = document.getElementById('languageChooserSelect')
+const metadataIsFirstCompletion = document.getElementById('metadataIsFirstCompletion')
+const inputs = document.getElementById('inputs')
+const submitButton = document.getElementById('submitButton')
+const buttons_to_page = document.querySelectorAll('button[to-page]')
+
+
+
+// TEAMS
+
 let teams = []
 let teams_selected = new Set()
 
@@ -25,12 +41,14 @@ function selectTeam(team) {
 	renderTeamSelected()
 	renderTeamSelectedAutomatically()
 }
+
 function deselectTeam(team) {
 	teams_selected = new Set([...teams_selected].filter(team_selected => team_selected.id !== team))
 	renderTeamSuggestions()
 	renderTeamSelected()
 	renderTeamSelectedAutomatically()
 }
+
 function renderTeamSuggestions() {
 	const team_suggestions_input = document.getElementById('team_suggestions_input')
 	const team_suggestions = document.getElementById('team_suggestions')
@@ -63,6 +81,7 @@ function renderTeamSuggestions() {
 		}
 	}
 }
+
 function renderTeamSelected() {
 	const teams_selected_node = document.getElementById('teams_selected')
 	teams_selected_node.innerHTML = ''
@@ -90,6 +109,7 @@ function renderTeamSelected() {
 		teams_selected_node.appendChild(team_chip)
 	}
 }
+
 function getParentTeams(parent_team_ids) {
 	let parent_teams = []
 
@@ -106,6 +126,7 @@ function getParentTeams(parent_team_ids) {
 
 	return parent_teams
 }
+
 function renderTeamSelectedAutomatically() {
 	const teams_selected_node = document.getElementById('teams_selected_automatically')
 	teams_selected_node.innerHTML = ''
@@ -123,6 +144,7 @@ function renderTeamSelectedAutomatically() {
 		teams_selected_node.appendChild(team_chip)
 	}
 }
+
 function loadTeams() {
 	// load teams from ./api/teams.json
 	fetch('./api/teams.json')
@@ -135,6 +157,7 @@ function loadTeams() {
 			console.error(error)
 		})
 }
+
 function initTeams() {
 	loadTeams()
 	renderTeamSuggestions()
@@ -142,9 +165,243 @@ function initTeams() {
 	renderTeamSelectedAutomatically()
 }
 
-const CloudFunctionsPrefix = 'https://us-central1-volt-4eca0.cloudfunctions.net/save_formdata'
 
 
+// SUBMIT ANSWERS
+
+
+function getIdentifier() {
+	// a got a few things from https://github.com/Valve/fingerprintjs2/blob/master/fingerprint2.js
+
+	// var getDoNotTrack = function() {
+	// 	if (navigator.doNotTrack) {
+	// 		return navigator.doNotTrack
+	// 	} else if (navigator.msDoNotTrack) {
+	// 		return navigator.msDoNotTrack
+	// 	} else if (window.doNotTrack) {
+	// 		return window.doNotTrack
+	// 	} else {
+	// 		return false
+	// 	}
+	// }
+	var getTouchSupport = function () {
+		var maxTouchPoints = 0
+		var touchEvent;
+		if (typeof navigator.maxTouchPoints !== 'undefined') {
+			maxTouchPoints = navigator.maxTouchPoints
+		} else if (typeof navigator.msMaxTouchPoints !== 'undefined') {
+			maxTouchPoints = navigator.msMaxTouchPoints
+		}
+		try {
+			document.createEvent('TouchEvent')
+			touchEvent = true
+		} catch (_) {
+			touchEvent = false
+		}
+		var touchStart = 'ontouchstart' in window
+		return [maxTouchPoints, touchEvent, touchStart]
+	}
+	var timezone = function () {
+		if (window.Intl && window.Intl.DateTimeFormat) {
+			return new window.Intl.DateTimeFormat().resolvedOptions().timeZone
+		}
+		return false
+	}
+
+	var relativly_unique_information = {
+		browserPlatform: navigator.platform,
+		javaEnabled: navigator.javaEnabled(),
+		dataCookiesEnabled: navigator.cookieEnabled,
+
+		sizeScreenAvailWidth: screen.availWidth,
+		sizeScreenAvailHeight: screen.availHeight,
+		sizeScreenWidth: screen.width,
+		sizeScreenHeight: screen.height,
+		scrColorDepth: screen.colorDepth,
+		scrPixelDepth: screen.pixelDepth,
+
+		hardwareConcurrency: navigator.hardwareConcurrency,
+		// doNotTrack: getDoNotTrack(),
+
+		isTouchCapable: getTouchSupport().join('|'),
+		// isTouchCapable:  'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch || navigator.maxTouchPoints > 0 || window.navigator.msMaxTouchPoints > 0,
+
+		timezoneOffset: new Date().getTimezoneOffset(),
+		timezone: timezone(),
+
+		browserLanguage: (navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage),
+		languages: [...(navigator.languages || [])].sort().join('|'),
+	}
+
+	return Object.values(relativly_unique_information).join('|')
+}
+
+function getTimelessButAnonymousTrackingCode(questionKey) {
+	// tatc = Timeless but Anonymous Tracking Code
+
+	const shaObj = new jsSHA('SHA3-512', 'TEXT')
+	shaObj.update(window.pre_tatc + '' + questionKey) // +' '+answerKey
+
+	return shaObj.getHash('HEX')
+}
+
+	}
+
+function clearForm() {
+	for (const ele of inputs.querySelectorAll('input[type="text"]')) {
+		ele.value = ''
+	}
+	for (const ele of inputs.querySelectorAll('input[type="number"]')) {
+		ele.value = ''
+	}
+	for (const ele of inputs.querySelectorAll('input[type="checkbox"]')) {
+		ele.checked = false
+	}
+	for (const ele of inputs.querySelectorAll('option')) {
+		ele.selected = false
+	}
+}
+
+function initSubmit() {
+	submitButton.addEventListener('click', () => {
+		submitForm()
+	})
+}
+
+
+/*
+function getTimelessButAnonymousTrackingCode(questionKey, answerKey) {
+	// tatc = Timeless but Anonymous Tracking Code
+
+	const shaObj = new jsSHA('SHA3-512', 'TEXT')
+	shaObj.update(window.pre_tatc + '' + questionKey) // +' '+answerKey
+
+	return shaObj.getHash('HEX')
+}
+function submitForm() {
+	if (navigator.onLine) {
+
+		var answers = []
+
+		const elements = [
+			...inputs.querySelectorAll('input[type="text"]'),
+			...inputs.querySelectorAll('textarea'),
+			...inputs.querySelectorAll('input[type="number"]'),
+		]
+		for (const ele of elements) {
+			const questionKey = ele.getAttribute('name')
+			const value = ele.value
+			if (value != '' && questionKey != '') {
+				answers.push({
+					questionKey: questionKey,
+					answerKey: null,
+					value: value,
+					// metadata: metadata,
+					// tatc: getTimelessButAnonymousTrackingCode(questionKey, null),
+				})
+			}
+		}
+
+		for (const ele of inputs.querySelectorAll('option')) {
+			const questionKey = ele.getAttribute('name')
+			const answerKey = ele.value
+			if (ele.selected && questionKey != '' && answerKey != '') {
+				answers.push({
+					questionKey: questionKey,
+					answerKey: answerKey,
+					value: true, // (ele.selected ? true : false),
+					// metadata: metadata,
+					// tatc: getTimelessButAnonymousTrackingCode(questionKey, null),
+				})
+			}
+		}
+
+		for (const ele of inputs.querySelectorAll('input[type="checkbox"]')) {
+			const questionKey = ele.getAttribute('name')
+			const answerKey = ele.value
+			if (ele.checked && questionKey != '' && answerKey != '') {
+				answers.push({
+					questionKey: questionKey,
+					answerKey: answerKey,
+					value: true, // (ele.checked ? true : false),
+					// metadata: metadata,
+					// tatc: getTimelessButAnonymousTrackingCode(questionKey, answerKey),
+				})
+			}
+		}
+
+		for (const ele of inputs.querySelectorAll('input[type="radio"]')) {
+			const questionKey = ele.getAttribute('name')
+			const answerKey = ele.value
+			if (ele.checked && questionKey != '' && answerKey != '') {
+				answers.push({
+					questionKey: questionKey,
+					answerKey: answerKey,
+					value: true, // (ele.checked ? true : false),
+					// metadata: metadata,
+					// tatc: getTimelessButAnonymousTrackingCode(questionKey, answerKey),
+				})
+			}
+		}
+
+
+
+		if (answers.length > 0) {
+			body.classList.add('saving')
+
+			// add the metadata
+			const metadata_country_value = answers.filter(a => a.questionKey == 'metadata_country').map(a => a.answerKey)[0] || ''
+			const metadata_city_value = answers.filter(a => a.questionKey == 'metadata_city').map(a => a.value)[0] || ''
+
+			const metadata = {}
+			answers = answers.filter(answer => answer.questionKey != 'metadata_country' && answer.questionKey != 'metadata_city')
+			// answers = answers.map(answer=> ({
+			// 	...answer,
+			// 	metadata: metadata,
+			// 	tatc: getTimelessButAnonymousTrackingCode(answer.questionKey, answer.answerKey),
+			// }) )
+			answers = answers.map(answer => Object.assign({}, answer, {
+				metadata: metadata,
+				tatc: getTimelessButAnonymousTrackingCode(answer.questionKey, answer.answerKey),
+			}))
+
+			console.log('answers:', answers)
+
+
+			let startTS = new Date() * 1
+			console.info('START', 0)
+
+			async.each(answers, (answer, callback) => {
+				const xmlReq = new XMLHttpRequest()
+				xmlReq.addEventListener('load', event => {
+					const json_res = JSON.parse(event.target.responseText)
+					if (!!json_res && !json_res.error) {
+						callback()
+					} else {
+						callback('error')
+					}
+				})
+				xmlReq.open('GET', CloudFunctionsPrefix + '?data=' + encodeURIComponent(JSON.stringify({ answers: [answer] })))
+				xmlReq.send()
+			}, error => {
+				console.info('END', (new Date() * 1) - startTS)
+				if (!!error) {
+					body.classList.add('error')
+					body.classList.remove('saving')
+				} else {
+					body.classList.add('success')
+					body.classList.remove('saving')
+					clearForm()
+				}
+			})
+		}
+	}
+}
+*/
+
+
+
+// GENERATE QUESTION FORM
 
 function resetBodyClasses() {
 	body.classList.remove('error')
@@ -152,25 +409,6 @@ function resetBodyClasses() {
 	body.classList.remove('saving')
 }
 
-function getByLanguage(objectWithValuesByLanguage) {
-	let value = '[NO TRANSLATION FOUND!]'
-
-	if (objectWithValuesByLanguage) {
-    if (objectWithValuesByLanguage[_language_]) {
-    	value = objectWithValuesByLanguage[_language_]
-    } else if (objectWithValuesByLanguage['en']) {
-    	value = objectWithValuesByLanguage['en']
-    } else if (objectWithValuesByLanguage['de']) {
-    	value = objectWithValuesByLanguage['de']
-    }
-	}
-
-	// if (value.indexOf(' ') > -1) {
-	// 	value = value.substr(0,value.lastIndexOf(' '))+'&nbsp;'+value.substr(value.lastIndexOf(' ')+1)
-	// }
-
-	return value
-}
 function generateForm(data) {
 	// websiteTitle.innerHTML = 'Volt — '+getByLanguage(_DATA_.translation_texts.website_title).replace(/\n+/g, ' ')
 
@@ -382,234 +620,9 @@ function generateForm(data) {
 	}
 }
 
-function getMetadata(country, city) {
-	// const now = new Date()
-
-	let metadata = {
-		// year and quater is calculated on the server
-		// year: now.getFullYear(),
-		// quater: Math.floor((now.getMonth() + 3) / 3),
-
-		isFirstCompletion: !!metadataIsFirstCompletion.checked,
-		// country: metadataCountries.getAttribute('selectedValue'),
-		// city: metadataCity.value,
-
-		country: country,
-		city: city,
-	}
-
-	return metadata
-}
-
-function getTimelessButAnonymousTrackingCode(questionKey, answerKey) {
-	// tatc = Timeless but Anonymous Tracking Code
-
-	const shaObj = new jsSHA('SHA3-512', 'TEXT')
-	shaObj.update(window.pre_tatc + '' + questionKey) // +' '+answerKey
-
-	return shaObj.getHash('HEX')
-}
-function submitForm() {
-	if (navigator.onLine) {
-
-		var answers = []
-
-		const elements = [
-			...inputs.querySelectorAll('input[type="text"]'),
-			...inputs.querySelectorAll('textarea'),
-			...inputs.querySelectorAll('input[type="number"]'),
-		]
-		for (const ele of elements) {
-			const questionKey = ele.getAttribute('name')
-			const value = ele.value
-			if (value != '' && questionKey != '') {
-				answers.push({
-					questionKey: questionKey,
-					answerKey: null,
-					value: value,
-					// metadata: metadata,
-					// tatc: getTimelessButAnonymousTrackingCode(questionKey, null),
-				})
-			}
-		}
-
-		for (const ele of inputs.querySelectorAll('option')) {
-			const questionKey = ele.getAttribute('name')
-			const answerKey = ele.value
-			if (ele.selected && questionKey != '' && answerKey != '') {
-				answers.push({
-					questionKey: questionKey,
-					answerKey: answerKey,
-					value: true, // (ele.selected ? true : false),
-					// metadata: metadata,
-					// tatc: getTimelessButAnonymousTrackingCode(questionKey, null),
-				})
-			}
-		}
-
-		for (const ele of inputs.querySelectorAll('input[type="checkbox"]')) {
-			const questionKey = ele.getAttribute('name')
-			const answerKey = ele.value
-			if (ele.checked && questionKey != '' && answerKey != '') {
-				answers.push({
-					questionKey: questionKey,
-					answerKey: answerKey,
-					value: true, // (ele.checked ? true : false),
-					// metadata: metadata,
-					// tatc: getTimelessButAnonymousTrackingCode(questionKey, answerKey),
-				})
-			}
-		}
-
-		for (const ele of inputs.querySelectorAll('input[type="radio"]')) {
-			const questionKey = ele.getAttribute('name')
-			const answerKey = ele.value
-			if (ele.checked && questionKey != '' && answerKey != '') {
-				answers.push({
-					questionKey: questionKey,
-					answerKey: answerKey,
-					value: true, // (ele.checked ? true : false),
-					// metadata: metadata,
-					// tatc: getTimelessButAnonymousTrackingCode(questionKey, answerKey),
-				})
-			}
-		}
 
 
-
-		if (answers.length > 0) {
-			body.classList.add('saving')
-
-			// add the metadata
-			const metadata_country_value = answers.filter(a => a.questionKey == 'metadata_country').map(a => a.answerKey)[0] || ''
-			const metadata_city_value = answers.filter(a => a.questionKey == 'metadata_city').map(a => a.value)[0] || ''
-
-			const metadata = getMetadata(metadata_country_value, metadata_city_value)
-			answers = answers.filter(answer => answer.questionKey != 'metadata_country' && answer.questionKey != 'metadata_city')
-			// answers = answers.map(answer=> ({
-			// 	...answer,
-			// 	metadata: metadata,
-			// 	tatc: getTimelessButAnonymousTrackingCode(answer.questionKey, answer.answerKey),
-			// }) )
-			answers = answers.map(answer => Object.assign({}, answer, {
-				metadata: metadata,
-				tatc: getTimelessButAnonymousTrackingCode(answer.questionKey, answer.answerKey),
-			}))
-
-			console.log('answers:', answers)
-
-
-			let startTS = new Date() * 1
-			console.info('START', 0)
-
-			async.each(answers, (answer, callback) => {
-				const xmlReq = new XMLHttpRequest()
-				xmlReq.addEventListener('load', event => {
-					const json_res = JSON.parse(event.target.responseText)
-					if (!!json_res && !json_res.error) {
-						callback()
-					} else {
-						callback('error')
-					}
-				})
-				xmlReq.open('GET', CloudFunctionsPrefix + '?data=' + encodeURIComponent(JSON.stringify({ answers: [answer] })))
-				xmlReq.send()
-			}, error => {
-				console.info('END', (new Date() * 1) - startTS)
-				if (!!error) {
-					body.classList.add('error')
-					body.classList.remove('saving')
-				} else {
-					body.classList.add('success')
-					body.classList.remove('saving')
-					clearForm()
-				}
-			})
-		}
-	}
-}
-
-function clearForm() {
-	for (const ele of inputs.querySelectorAll('input[type="text"]')) {
-		ele.value = ''
-	}
-	for (const ele of inputs.querySelectorAll('input[type="number"]')) {
-		ele.value = ''
-	}
-	for (const ele of inputs.querySelectorAll('input[type="checkbox"]')) {
-		ele.checked = false
-	}
-	for (const ele of inputs.querySelectorAll('option')) {
-		ele.selected = false
-	}
-}
-
-function getIdentifier() {
-	// a got a few things from https://github.com/Valve/fingerprintjs2/blob/master/fingerprint2.js
-
-	// var getDoNotTrack = function() {
-	// 	if (navigator.doNotTrack) {
-	// 		return navigator.doNotTrack
-	// 	} else if (navigator.msDoNotTrack) {
-	// 		return navigator.msDoNotTrack
-	// 	} else if (window.doNotTrack) {
-	// 		return window.doNotTrack
-	// 	} else {
-	// 		return false
-	// 	}
-	// }
-	var getTouchSupport = function () {
-		var maxTouchPoints = 0
-		var touchEvent;
-		if (typeof navigator.maxTouchPoints !== 'undefined') {
-			maxTouchPoints = navigator.maxTouchPoints
-		} else if (typeof navigator.msMaxTouchPoints !== 'undefined') {
-			maxTouchPoints = navigator.msMaxTouchPoints
-		}
-		try {
-			document.createEvent('TouchEvent')
-			touchEvent = true
-		} catch (_) {
-			touchEvent = false
-		}
-		var touchStart = 'ontouchstart' in window
-		return [maxTouchPoints, touchEvent, touchStart]
-	}
-	var timezone = function () {
-		if (window.Intl && window.Intl.DateTimeFormat) {
-			return new window.Intl.DateTimeFormat().resolvedOptions().timeZone
-		}
-		return false
-	}
-
-	var relativly_unique_information = {
-		browserPlatform: navigator.platform,
-		javaEnabled: navigator.javaEnabled(),
-		dataCookiesEnabled: navigator.cookieEnabled,
-
-		sizeScreenAvailWidth: screen.availWidth,
-		sizeScreenAvailHeight: screen.availHeight,
-		sizeScreenWidth: screen.width,
-		sizeScreenHeight: screen.height,
-		scrColorDepth: screen.colorDepth,
-		scrPixelDepth: screen.pixelDepth,
-
-		hardwareConcurrency: navigator.hardwareConcurrency,
-		// doNotTrack: getDoNotTrack(),
-
-		isTouchCapable: getTouchSupport().join('|'),
-		// isTouchCapable:  'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch || navigator.maxTouchPoints > 0 || window.navigator.msMaxTouchPoints > 0,
-
-		timezoneOffset: new Date().getTimezoneOffset(),
-		timezone: timezone(),
-
-		browserLanguage: (navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage),
-		languages: [...(navigator.languages || [])].sort().join('|'),
-	}
-
-	return Object.values(relativly_unique_information).join('|')
-}
-
+// TRANSLATION
 
 function parseQuery(queryString) {
 	var query = {}
@@ -622,6 +635,7 @@ function parseQuery(queryString) {
 	}
 	return query
 }
+
 function obj2searchQuery(obj) {
 	var query_parts = []
 	for (const key of Object.keys(obj)) {
@@ -629,17 +643,25 @@ function obj2searchQuery(obj) {
 	}
 	return '?' + query_parts.join('&')
 }
-function setMetadata() {
-	// const now = new Date()
-	// metaDataCurrentYear.innerHTML = now.getFullYear()
-	// metadataCurrentRangeInYear.innerHTML = getByLanguage(_DATA_.months[now.getMonth()+1]) // quater = Math.floor((now.getMonth() + 3) / 3)
 
-	const locationSearchObj = parseQuery(window.location.search)
-	window.volt_country_party = (!!locationSearchObj.country ? locationSearchObj.country.toUpperCase() : 'DEU')
-	window.volt_city = (!!locationSearchObj.city ? locationSearchObj.city : '')
+function getByLanguage(objectWithValuesByLanguage) {
+	let value = '[NO TRANSLATION FOUND!]'
 
-	window.pre_tatc = (!!locationSearchObj.tatc ? locationSearchObj.tatc : getIdentifier()) // tatc from get   OR   a relatively good unique idetifier
-	// tatc = Timeless but Anonymous Tracking Code
+	if (objectWithValuesByLanguage) {
+		if (objectWithValuesByLanguage[_language_]) {
+			value = objectWithValuesByLanguage[_language_]
+		} else if (objectWithValuesByLanguage['en']) {
+			value = objectWithValuesByLanguage['en']
+		} else if (objectWithValuesByLanguage['de']) {
+			value = objectWithValuesByLanguage['de']
+		}
+	}
+
+	// if (value.indexOf(' ') > -1) {
+	// 	value = value.substr(0,value.lastIndexOf(' '))+'&nbsp;'+value.substr(value.lastIndexOf(' ')+1)
+	// }
+
+	return value
 }
 
 function updateLanguageTexts() {
@@ -682,43 +704,26 @@ function updateLanguageTexts() {
 }
 
 
-const body = document.getElementsByTagName('body')[0]
-const websiteTitle = document.getElementById('websiteTitle')
-const languageChooserSelect = document.getElementById('languageChooserSelect')
-const metadataIsFirstCompletion = document.getElementById('metadataIsFirstCompletion')
-const inputs = document.getElementById('inputs')
-const submitButton = document.getElementById('submitButton')
 
+// NAVIGATION
 
-
-const buttons_to_page = document.querySelectorAll('button[to-page]')
-for (const button of buttons_to_page) {
-	button.addEventListener('click', () => {
-		const toPage = button.getAttribute('to-page')
-		if (!['', 'intro', 'privacy', 'metadata', 'questions'].includes(toPage)) {
-			toPage = ''
-		}
-		body.setAttribute('show', toPage)
-		window.scrollTo(0, 0)
-		history.pushState(null, websiteTitle.innerText, '#' + toPage)
-	})
+function initNavigationButtons() {
+	for (const button of buttons_to_page) {
+		button.addEventListener('click', () => {
+			const toPage = button.getAttribute('to-page')
+			if (!['', 'intro', 'privacy', 'metadata', 'questions'].includes(toPage)) {
+				toPage = ''
+			}
+			body.setAttribute('show', toPage)
+			window.scrollTo(0, 0)
+			history.pushState(null, websiteTitle.innerText, '#' + toPage)
+		})
+	}
 }
 
-languageChooserSelect.addEventListener('change', e => {
-	const optionEles = e.target.querySelectorAll('option')
-	for (let optionEle of optionEles) {
-		if (optionEle.selected) {
-			window._language_ = optionEle.value
-			updateLanguageTexts()
 
-			var locationSearchObj = parseQuery(window.location.search)
-			locationSearchObj.lang = optionEle.value
-			history.pushState(null, websiteTitle.innerText, window.location.protocol + '//' + window.location.host + window.location.pathname + obj2searchQuery(locationSearchObj) + window.location.hash)
 
-			break
-		}
-	}
-})
+// LANGUAGE CHOOSER
 
 function selectLanguageInSelector() {
 	const html_node = document.querySelector('html')
@@ -733,6 +738,7 @@ function selectLanguageInSelector() {
 		}
 	}
 }
+
 function checkUrl() {
 
 	// check hash
@@ -755,21 +761,34 @@ function checkUrl() {
 	updateLanguageTexts()
 
 }
-window.addEventListener('popstate', checkUrl)
+
+function initLanguageChooser() {
+	languageChooserSelect.addEventListener('change', e => {
+		const optionEles = e.target.querySelectorAll('option')
+		for (let optionEle of optionEles) {
+			if (optionEle.selected) {
+				window._language_ = optionEle.value
+				updateLanguageTexts()
+
+				var locationSearchObj = parseQuery(window.location.search)
+				locationSearchObj.lang = optionEle.value
+				history.pushState(null, websiteTitle.innerText, window.location.protocol + '//' + window.location.host + window.location.pathname + obj2searchQuery(locationSearchObj) + window.location.hash)
+
+				break
+			}
+		}
+	})
+
+	window.addEventListener('popstate', checkUrl)
+}
 
 
 
-
-submitButton.addEventListener('click', () => {
-	submitForm()
-})
-
-
+// INIT WEBSITE
 
 function _DATA_GOT_LOADED() {
 	if (typeof _DATA_ !== 'undefined') {
 		checkUrl()
-		setMetadata()
 		generateForm(_DATA_)
 	}
 }
@@ -777,4 +796,7 @@ function _DATA_GOT_LOADED() {
 window.addEventListener('load', () => {
 	_DATA_GOT_LOADED()
 	initTeams()
+	initLanguageChooser()
+	initNavigationButtons()
+	initSubmit()
 })
