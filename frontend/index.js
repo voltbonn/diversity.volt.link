@@ -141,7 +141,6 @@ function initTeams() {
 	renderTeamSelected()
 	renderTeamSelectedAutomatically()
 }
-initTeams()
 
 const CloudFunctionsPrefix = 'https://us-central1-volt-4eca0.cloudfunctions.net/save_formdata'
 
@@ -774,4 +773,8 @@ function _DATA_GOT_LOADED() {
 		generateForm(_DATA_)
 	}
 }
-_DATA_GOT_LOADED()
+
+window.addEventListener('load', () => {
+	_DATA_GOT_LOADED()
+	initTeams()
+}
