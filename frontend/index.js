@@ -777,4 +777,4 @@ function _DATA_GOT_LOADED() {
 window.addEventListener('load', () => {
 	_DATA_GOT_LOADED()
 	initTeams()
-}
+})
