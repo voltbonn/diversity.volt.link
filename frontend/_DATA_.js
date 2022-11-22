@@ -18,12 +18,12 @@ const _DATA_ = {
 			// 	Mit dieser Umfrage möchten wir ein Bild davon bekommen.
 			// `,
 			de: `
-				Um unseren internen Diversitäts-Ansprüchen nachzukommen, müssen wir rausfinden wie divers wir sind.
+				Um unseren internen Diversitäts-Ansprüchen nachzukommen, müssen wir rausfinden wie vielfältig wir sind. Und wo wir verbesserungs Bedarf haben.
 				Mit dieser Umfrage machen wir uns ein Bild davon.
 			`,
 			en: `
-				To meet our internal diversity goals, we need to find out how diverse we actually are.
-				With this survey, we'll get a picture of that.
+				To meet our internal diversity goals, we need to find out how diverse we actually are. And where we need to improve.
+				With this survey, we want to get a picture of that.
 			`,
 		},
 		//website_privacy: {de:`
