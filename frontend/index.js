@@ -169,6 +169,7 @@ function initTeams() {
 
 // SUBMIT ANSWERS
 
+let relationToVolt = ''
 
 function getIdentifier() {
 	// a got a few things from https://github.com/Valve/fingerprintjs2/blob/master/fingerprint2.js
@@ -245,7 +246,25 @@ function getTimelessButAnonymousTrackingCode(questionKey) {
 	return shaObj.getHash('HEX')
 }
 
+function getRelationToVolt() {
+}
+
+function saveMetadataMembership() {
+	let membership_options = [
+		...document.querySelectorAll('input[type="radio"][name=metadata_membership]')
+	]
+		.filter(option => option.checked === true)
+
+	if (membership_options.length > 0) {
+		relationToVolt = membership_options[0].value
+	} else {
+		relationToVolt = ''
+	}
+}
+
 function submitData(questionKey, answerKey) {
+
+	const relationToVolt = getRelationToVolt()
 
 	let team = [...teams_selected]
 	if (team.length > 0) {
@@ -255,6 +274,7 @@ function submitData(questionKey, answerKey) {
 			questionKey,
 			answerKey,
 			metadata: {
+				relationToVolt,
 				team: window.volt_team,
 				timestamp: new Date() * 1,
 				tact: getTimelessButAnonymousTrackingCode({
@@ -300,6 +320,10 @@ function clearForm() {
 	for (const ele of inputs.querySelectorAll('option')) {
 		ele.selected = false
 	}
+}
+
+function submitForm() {
+	console.log('relationToVolt', relationToVolt)
 }
 
 function initSubmit() {

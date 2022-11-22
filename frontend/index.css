@@ -461,8 +461,8 @@ input.inline {
 	padding: 0 0 0 4px;
 }
 
-label.languageChooserWrapper {
-	margin: 32px 0 16px 0;
+label.selectWrapper {
+	margin: 0;
 	display: flex;
 	align-items: center;
 	background: white;
@@ -472,22 +472,30 @@ label.languageChooserWrapper {
 	/*font-family: "Ubuntu", "Helvetica", "Arial", sans-serif;*/
 	outline: none;
 	cursor: pointer;
-	color: var(--volt-purple);
 	font-weight: bold;
+	color: currentColor;
 }
 
-label.languageChooserWrapper .labelText {
+label.selectWrapper .labelText {
 	margin: 0 -22px 0 22px;
 }
 
-label.languageChooserWrapper select {
+label.selectWrapper select {
 	/*padding: 0 22px 0 8px;*/
-	background: rgb(255, 0, 0, 0.5);
-	padding: 0 0 0 121px;
-	margin-left: -84px;
+	padding: 0 12px;
 	background: transparent;
 	color: inherit;
 	font-weight: inherit;
+	border-color: currentColor;
+}
+
+label.selectWrapper[for="languageChooserSelect"] {
+	color: var(--volt-purple);
+}
+label.selectWrapper[for="languageChooserSelect"] select {
+	padding: 0 0 0 121px;
+	margin-left: -84px;
+	border-color: var(--volt-purple);
 }
 
 .radio_or_checkbox_label {
@@ -500,8 +508,7 @@ label.languageChooserWrapper select {
 	flex-direction: row;
 }
 .radio_or_checkbox_label:hover {
-	background-color: var(--volt-purple);
-	color: white;
+	font-weight: bold;
 }
 
 .radio_or_checkbox_label input[type="checkbox"],
@@ -520,7 +527,7 @@ label.languageChooserWrapper select {
 	flex-shrink: 0;
 
 	background: var(--light-color);
-	border: 3px solid var(--volt-purple);
+	border: 3px solid currentColor;
 	transition: background 0.2s ease, border 0.2s ease;
 }
 
@@ -530,8 +537,8 @@ label.languageChooserWrapper select {
 
 .radio_or_checkbox_label input[type="checkbox"]:checked,
 .radio_or_checkbox_label input[type="radio"]:checked {
-	background: var(--volt-purple);
-	border: 3px solid var(--volt-purple);
+	background: currentColor;
+	border: 3px solid currentColor;
 }
 
 .radio_or_checkbox_label input[type="checkbox"]:before,

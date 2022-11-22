@@ -104,7 +104,7 @@
 						With this survey, we want to get a picture of that.
 					</p>
 
-					<label class="languageChooserWrapper" for="languageChooserSelect">
+					<label class="selectWrapper" for="languageChooserSelect">
 						<div class="labelText">Language:</div>
 						<select class="not_showingAllOptions" style="border-width:0;" id="languageChooserSelect">
 							<option value="en">English</option>
@@ -161,7 +161,28 @@
 					<p data-translation-key="metadata_description"></p>
 				</div>
 				<div class="block_right">
-					<h2 data-translation-key="metadata_team_search_heading" style="margin-block-start: -35px;"></h2><br>
+					<h2 data-translation-key="metadata_membership_heading" style="margin-block-start: -35px;"></h2><br>
+					<p>
+						<strong data-translation-key="metadata_membership_description"></strong>
+					</p>
+
+					<label class="radio_or_checkbox_label">
+						<input type="radio" name="metadata_membership" value="member" onchange="saveMetadataMembership()" checked>
+						<span data-translation-key="metadata_membership_option_member"></span>
+					</label>
+					<label class="radio_or_checkbox_label">
+						<input type="radio" name="metadata_membership" value="supporter" onchange="saveMetadataMembership()">
+						<span data-translation-key="metadata_membership_option_supporter"></span>
+					</label>
+					<label class="radio_or_checkbox_label">
+						<input type="radio" name="metadata_membership" value="unrelated" onchange="saveMetadataMembership()">
+						<span data-translation-key="metadata_membership_option_unrelated"></span>
+					</label>
+
+					<br />
+					<br />
+
+					<h2 data-translation-key="metadata_team_search_heading" style="padding-top: 0;"></h2><br>
 					<p>
 						<strong data-translation-key="metadata_team_search_description"></strong>
 					</p>

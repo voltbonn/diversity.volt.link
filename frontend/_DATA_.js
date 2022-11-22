@@ -109,15 +109,19 @@ const _DATA_ = {
 		},
 		metadata_description: {
 			de: `Hier kannst du auswählen zu welchen Teams deine Antworten zählen sollen. Du kannst mehrere Local-Teams auswählen.
+
+			Wir fragen dich hier auch nach deiner Verbindung zu Volt Europa. Dies hilft uns rauszubekommen, wie statistisch repräsentativ die Umfrage ist.
 			
-			Die Daten werden zu jedem Team einzeln gespeichert. So können die Daten weniger auf dich zurückgeführt werden.
+			Die Antworten im nächsten Schritt werden zu jedem Team einzeln gespeichert. So können die Daten weniger auf dich zurückgeführt werden.
 			
 			Die Daten werden automatisch auch zu den übergeordnten Teams gespeichert. Zum Beispiel werden die Daten zu den Local-Teams auch zu den Regional- und Nationalen-Teams und zu Volt Europa gespeichert.`,
 			en: `Here you can select which teams your answers should count for. You can select multiple local teams.
-			
-			The data will be saved separately for each team. This way the data can be less attributed to you.
 
-			The data will automatically also be saved for the higher-level teams. For example, the data for the local teams will also be saved for the regional- and national-teams and Volt Europe.`,
+			We also ask you about your relation to Volt Europa. This helps us to find out how statistically representative the survey is.
+			
+			The answers in the next step will be saved separately for each team. This way the data can be less attributed to you.
+
+			The data will also be automatically saved for the higher-level teams. For example, the data for the local teams will also be saved for the regional- and national-teams and Volt Europe.`,
 		},
 		metadata_team_search_heading: {
 			de: 'Deine Local Teams',
@@ -131,6 +135,28 @@ const _DATA_ = {
 			de: 'Ausgewählte Teams:',
 			en: 'Selected teams:',
 		},
+
+		metadata_membership_heading: {
+			de: 'Verbindung zu Volt',
+			en: 'Relationship to Volt',
+		},
+		metadata_membership_description: {
+			de: 'Wählen hier aus, welche Verbindung du zu Volt Europa hast.',
+			en: 'Select your relation to Volt Europe.',
+		},
+		metadata_membership_option_member: {
+			de: 'Mitglied von Volt Europa',
+			en: 'Member of Volt Europa',
+		},
+		metadata_membership_option_supporter: {
+			de: 'Unterstützend bei Volt Europa',
+			en: 'Supporter at Volt Europa',
+		},
+		metadata_membership_option_unrelated: {
+			de: 'Keine Verbindung zu Volt Europa',
+			en: 'No relation to Volt Europa',
+		},
+
 		button_to_questions: {
 			de: 'Zu den Fragen',
 			en: 'To the questions',
