@@ -93,7 +93,7 @@ a:hover {
 	display: block;
 }
 
-.page.violet_bg {
+.page.purple_bg {
 	color: white;
 	background: var(--volt-purple);
 }
@@ -108,107 +108,41 @@ a:hover {
 	background: var(--volt-blue);
 }
 
+.page.white_bg {
+	color: var(--volt-purple);
+	background: white;
+}
+
 .page .pageContent {
 	width: var(--page-width);
 	max-width: calc(100% - 64px);
 	margin: 0 auto;
 	padding: 64px 0;
 }
+.page .pageContent.question_page {
+	width: 100%;
+	max-width: 100%;
+	padding: 64px 32px;
+}
 
 section {
-	margin: 128px 0 32px 0;
+	background: var(--section-color);
+	color: var(--on-section-color);
+	margin: 0 -32px;
+	padding: 128px 32px 32px 32px;
 }
 
-section .intro {
-	width: 500px;
-	max-width: 100%;
-	margin: 64px 0 0 0;
-}
-
-.question {
-	display: block;
-	width: 500px;
-	max-width: 100%;
-	/*padding: 32px;*/
-	margin: 64px 0 0 0;
-	/*box-shadow: 0 16px 32px rgba(0,0,0,0.2);*/
-}
-
-@media (max-width: 800px) {
-	.question {
-margin: 32px 0 0 0;
-	}
-}
-
-.voltLogo {
-	z-index: 1;
-	position: relative;
-	display: inline-block;
-	color: var(--volt-purple) !important;
-	margin-top: 32px;
-
-	transition: top 0.2s ease, margin-bottom 0.2s ease;
-}
-
-.website_heading {
-	margin-top: 32px;
-}
-
-.website_description {
-	/* margin-top: 16px; */
-
-	transition: margin-top 0.2s ease;
-}
-
-@media (max-width: 800px) {
-	.website_heading {
-    margin-top: 0;
-	}
-}
-
-
-h1 {
-	margin: 0;
-	font-size: 4rem;
-	line-height: 1;
-
-	color: var(--on-light-color);
-
-	transition: font-size 0.2s ease;
-}
-
-.page.violet_bg h1,
-.page.red_bg h1,
-.page.blue_bg h1 {
-	color: var(--on-dark-color);
-}
-
-@media (max-width: 800px) {
-	h1 {
-		font-size: 3rem;
-	}
-}
-
-h2 {
-	display: inline-block;
-	position: relative;
-
-	color: white;
-
-	font-size: 2rem;
-	line-height: 1.6;
-
-	padding: 16px 32px;
-	margin: 0 -32px -16px -32px;
-
-	-webkit-box-decoration-break: clone;
-	box-decoration-break: clone;
-}
 
 section h2 {
-	background: var(--volt-purple);
+	/* background: white; */
+	/* color: var(--volt-purple); */
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	color: currentColor;
 }
 
+/*
 section h2:after {
 	z-index: -1;
 	content: '';
@@ -249,9 +183,108 @@ section h2:after {
 	calc(var(--block-width) *  8) 0 0 var(--volt-purple),
 	calc(var(--block-width) *  9) 0 0 var(--volt-purple);*/
 }
+*/
+
+section .intro {
+	width: 500px;
+	max-width: 100%;
+	margin: 64px 0 0 0;
+}
+
+.page .pageContent.question_page .questions {
+	margin-top: 32px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	gap: 32px;
+}
+@media (max-width: 500px) {
+	.page .pageContent.question_page .questions {
+		grid-template-columns: 100%;
+	}
+}
+
+.question {
+	display: block;
+	width: 100%;
+	padding: 32px;
+
+	background: white;
+	color: var(--volt-purple);
+}
+.question h3 {
+	margin-bottom: 16px;
+}
+
+.voltLogo {
+	z-index: 1;
+	position: relative;
+	display: inline-block;
+	color: var(--volt-purple) !important;
+	margin-top: 32px;
+
+	transition: top 0.2s ease, margin-bottom 0.2s ease;
+}
+
+.website_heading {
+	margin-top: 32px;
+}
+
+.website_description {
+	/* margin-top: 16px; */
+
+	transition: margin-top 0.2s ease;
+}
+
+@media (max-width: 800px) {
+	.website_heading {
+    margin-top: 0;
+	}
+}
+
+
+h1 {
+	margin: 0;
+	font-size: 4rem;
+	line-height: 1;
+
+	color: var(--on-light-color);
+
+	transition: font-size 0.2s ease;
+}
+
+.page.purple_bg h1,
+.page.red_bg h1,
+.page.blue_bg h1 {
+	color: var(--on-dark-color);
+}
+.page.white_bg h1 {
+	color: var(--volt-purple);
+}
+
+@media (max-width: 800px) {
+	h1 {
+		font-size: 3rem;
+	}
+}
+
+h2 {
+	display: inline-block;
+	position: relative;
+
+	color: white;
+
+	font-size: 2rem;
+	line-height: 1.6;
+
+	padding: 16px 32px;
+	margin: 0 -32px -16px -32px;
+
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
 
 h3 {
-	font-size: 1rem;
+	font-size: 1.25rem;
 	cursor: text;
 	margin: 0 0 16px 0;
 }
@@ -439,11 +472,16 @@ label.languageChooserWrapper select {
 
 .radio_or_checkbox_label {
 	line-height: 32px;
-	padding: 2px 0;
+	padding: 4px;
+	margin: 0 -4px;
 	cursor: pointer;
 
 	display: flex;
 	flex-direction: row;
+}
+.radio_or_checkbox_label:hover {
+	background-color: var(--volt-purple);
+	color: white;
 }
 
 .radio_or_checkbox_label input[type="checkbox"],
@@ -535,7 +573,7 @@ button {
 	transition: opacity 0.2s ease;
 }
 
-.page.violet_bg button {
+.page.purple_bg button {
 	background: var(--light-color);
 	color: var(--volt-purple);
 }
@@ -546,7 +584,10 @@ button {
 	color: var(--on-light-color);
 }
 
-button.green {
+button.green,
+.page.purple_bg button,
+.page.red_bg button,
+.page.blue_bg button {
 	background: var(--volt-green);
 	color: white;
 }
