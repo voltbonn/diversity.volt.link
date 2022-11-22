@@ -245,7 +245,47 @@ function getTimelessButAnonymousTrackingCode(questionKey) {
 	return shaObj.getHash('HEX')
 }
 
+function submitData(questionKey, answerKey) {
+
+	let team = [...teams_selected]
+	if (team.length > 0) {
+		team = team[0]
+
+		const data = {
+			questionKey,
+			answerKey,
+			metadata: {
+				team: window.volt_team,
+				timestamp: new Date() * 1,
+				tact: getTimelessButAnonymousTrackingCode({
+					identifier: getIdentifier(),
+					team,
+					questionKey,
+				}),
+			},
+		}
+
+
+		// send data to post: /api/submit_data using fetch
+		fetch('/api/submit_data', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		}).then(response => {
+			if (response.status === 200) {
+				return response.json()
+			} else {
+				throw new Error('Something went wrong on api server!');
+			}
+		}).then(response => {
+			console.debug(response);
+		}).catch(error => {
+			console.error(error);
+		})
 	}
+}
 
 function clearForm() {
 	for (const ele of inputs.querySelectorAll('input[type="text"]')) {

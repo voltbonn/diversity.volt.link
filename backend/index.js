@@ -287,6 +287,13 @@ app.get('/api/teams.json', function (req, res, next) {
   }
 })
 
+app.post('/api/submit_data', function (req, res, next) {
+  const body = JSON.parse(req.body) || null
+  console.log(body)
+  res.sendStatus(200)
+  res.end()
+})
+
 app.get('/', function (req, res, next) {
   showClient(res) // show index.html
 })
