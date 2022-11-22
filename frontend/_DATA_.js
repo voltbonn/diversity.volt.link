@@ -52,6 +52,10 @@ const _DATA_ = {
 			de: 'Impressum',
 			en: 'Imprint',
 		},
+		button_contact: {
+			de: 'Kontakt',
+			en: 'Contact',
+		},
 
 		button_to_privacy: {
 			de: 'Los geht\'s',
