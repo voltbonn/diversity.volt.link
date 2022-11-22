@@ -722,7 +722,7 @@ languageChooserSelect.addEventListener('change', e => {
 })
 
 function selectLanguageInSelector() {
-	const html_node = languageChooserSelect.querySelector('html')
+	const html_node = document.querySelector('html')
 	html_node.setAttribute('lang', window._language_)
 
 	const optionEles = languageChooserSelect.querySelectorAll('option')
