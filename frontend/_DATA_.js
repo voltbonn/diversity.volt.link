@@ -166,6 +166,7 @@ const _DATA_ = {
 	},
 	sections: [
 		{
+			color: '#502379',
 			heading: {
 				de: 'Bildung',
 				en: 'Education',
@@ -215,6 +216,7 @@ const _DATA_ = {
 			}
 		},
 		{
+			color: '#FDC220',
 			heading: { de: 'Kultur' },
 			questions: {
 				amount_of_kown_languages: {
@@ -248,6 +250,7 @@ const _DATA_ = {
 			}
 		},
 		{
+			color: '#E63E12',
 			heading: { de: 'Diskriminierung' },
 			questions: {
 				discriminatory_experiences: {
@@ -312,6 +315,7 @@ const _DATA_ = {
 			},
 		},
 		{
+			color: '#1BBE6F',
 			heading: { de: 'LGBTQ*' },
 			questions: {
 				gender: {
@@ -356,6 +360,7 @@ const _DATA_ = {
 			},
 		},
 		{
+			color: '#82D0F4',
 			heading: { de: 'Psyche' },
 			questions: {
 				psychological_difficulties: {
@@ -410,6 +415,7 @@ const _DATA_ = {
 			},
 		},
 		{
+			color: '#502379',
 			heading: { de: 'Hilfsmittel' },
 			questions: {
 				everyday_aids: {
@@ -447,6 +453,7 @@ const _DATA_ = {
 			}
 		},
 		{
+			color: '#502379',
 			heading: { de: 'Verbesserung der Umfrage' },
 			intro: { de: 'Die ist unsere erste Umfrage dieser Art. Hier kannst du uns helfen diese weiter zu entwickeln …' },
 			questions: {
