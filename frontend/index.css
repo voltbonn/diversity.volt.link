@@ -585,9 +585,9 @@ button {
 }
 
 button.green,
-.page.purple_bg button,
-.page.red_bg button,
-.page.blue_bg button {
+.page.purple_bg button.green,
+.page.red_bg button.green,
+.page.blue_bg button.green {
 	background: var(--volt-green);
 	color: white;
 }
