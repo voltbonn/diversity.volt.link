@@ -273,8 +273,8 @@ const _DATA_ = {
 			},
 			questions: {
 				discriminatory_experiences: {
-					question: { de: 'In welchen Bereichen hast du schonmal diskriminierende Erfahrungen gemacht?' },
-					// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
+					question: { de: 'In welchen Bereichen hast du diskriminierende Erfahrungen erfahren?' },
+					why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind. Und über welche Diskriminierungen wir Erfahrung in Volt haben.'},
 					type: 'checkbox',
 					options: {
 						'ancestry': { de: 'Ethnische Herkunft oder Hauttyp' },
@@ -285,6 +285,7 @@ const _DATA_ = {
 						'ideology': { de: 'Religion oder Weltanschauung' },
 						'classism': { de: 'Vermögen oder sozialen Herkunft' },
 						'other': { de: 'andere Bereiche' },
+						'none': { de: 'Ich hatte keine diskriminierenden Erfahrungen.' },
 					},
 				},
 				// skin_tone: {
@@ -322,15 +323,22 @@ const _DATA_ = {
 				// 		},
 				// 	},
 				// },
-				// discriminatory_experiences_within_volt: {
-				// 	question: {de: 'Hast diskriminierende Erfahrungen innerhalb von Volt gemacht?'},
-				// 	// why: {de: 'Hier mit möchten wir herrausfinden, wie privilegiert Volt Mitglieder sind.'},
-				// 	type: 'checkbox',
-				// 	options: {
-				// 		'yes': {de: 'Ja'},
-				// 		'no': {de: 'Nein'},
-				// 	},
-				// },
+				discriminatory_experiences_within_volt: {
+					question: { de: 'In welchen Bereichen hast du diskriminierende Erfahrungen in Volt Europa erfahren?' },
+					why: {de: 'Hier mit möchten wir herrausfinden, an welchen Stellen wir unsere Mitglieder besser schützen und schulen müssen.'},
+					type: 'checkbox',
+					options: {
+						'ancestry': { de: 'Ethnische Herkunft oder Hauttyp' },
+						'sex_or_gender': { de: 'Geschlecht oder Gender' },
+						'sexual_orientation': { de: 'Sexuelle Orientierung' },
+						'age': { de: 'Alter' },
+						'disabilities': { de: 'Behinderung oder chronische Krankheit' },
+						'ideology': { de: 'Religion oder Weltanschauung' },
+						'classism': { de: 'Vermögen oder sozialen Herkunft' },
+						'other': { de: 'andere Bereiche' },
+						'none': { de: 'Ich hatte keine diskriminierenden Erfahrungen in Volt.' },
+					},
+				},
 			},
 		},
 		{
