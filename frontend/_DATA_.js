@@ -136,6 +136,11 @@ const _DATA_ = {
 			en: 'To the questions',
 		},
 
+		questions_heading: {
+			de: 'Fragen',
+			en: 'Questions',
+		},
+
 		button_send_to_volt: {
 			de: 'An Volt senden',
 			en: 'Send to Volt',
