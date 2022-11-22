@@ -131,6 +131,26 @@ section {
 	margin: 0 -32px;
 	padding: 128px 32px 32px 32px;
 }
+section[color="purple"] {
+	--section-color: var(--volt-purple);
+	--on-section-color: white;
+}
+section[color="blue"] {
+	--section-color: var(--volt-blue);
+	--on-section-color: black;
+}
+section[color="red"] {
+	--section-color: var(--volt-red);
+	--on-section-color: white;
+}
+section[color="yellow"] {
+	--section-color: var(--volt-yellow);
+	--on-section-color: black;
+}
+section[color="green"] {
+	--section-color: var(--volt-green);
+	--on-section-color: white;
+}
 
 
 section h2 {

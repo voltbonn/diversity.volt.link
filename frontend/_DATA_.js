@@ -166,7 +166,7 @@ const _DATA_ = {
 	},
 	sections: [
 		{
-			color: '#502379',
+			color: 'purple',
 			heading: {
 				de: 'Bildung und Kultur',
 				en: 'Education and Culture',
@@ -240,7 +240,7 @@ const _DATA_ = {
 			}
 		},
 		{
-			color: '#E63E12',
+			color: 'red',
 			heading: {
 				de: 'Diskriminierung',
 				en: 'Discrimination',
@@ -308,7 +308,7 @@ const _DATA_ = {
 			},
 		},
 		{
-			color: '#FDC220',
+			color: 'yellow',
 			heading: {
 				de: 'LGBTIAQ+',
 				en: 'LGBTIAQ+',
@@ -356,7 +356,7 @@ const _DATA_ = {
 			},
 		},
 		{
-			color: '#82D0F4',
+			color: 'blue',
 			heading: {
 				de: 'Mentale Gesundheit',
 				en: 'Mental Health',
@@ -414,7 +414,7 @@ const _DATA_ = {
 			},
 		},
 		{
-			color: '#1BBE6F',
+			color: 'green',
 			heading: {
 				de: 'Hilfsmittel',
 				en: 'Assistive Technology',
@@ -501,7 +501,7 @@ const _DATA_ = {
 			}
 		},
 		{
-			color: '#502379',
+			color: 'purple',
 			heading: {
 				de: 'Verbesserung der Umfrage',
 				en: 'Improving the Survey',
