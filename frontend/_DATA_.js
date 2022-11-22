@@ -168,57 +168,47 @@ const _DATA_ = {
 		{
 			color: '#502379',
 			heading: {
-				de: 'Bildung',
-				en: 'Education',
+				de: 'Bildung und Kultur',
+				en: 'Education and Culture',
 			},
 			questions: {
 				highest_degree_of_education: {
-					question: { de: 'Dein höchster Bildungsabschluss…' },
+					question: {
+						de: 'Dein höchster Bildungsabschluss…',
+						en: 'Your highest degree of education…',
+					},
 					// why: {de: 'Aus welcher Bildungsschicht kommen unsere Mitglieder?'},
 					type: 'radio', // 'chooser',
 					options: {
-						'none': { de: 'Kein Abschluss' },
-						'ISCED_1': { de: 'Vollendung der Grundschule' },
-						'ISCED_2': { de: 'Haupt- / Realschulabschluss' },
+						'none': {
+							de: 'Kein Abschluss',
+							en: 'No degree',
+						},
+						'ISCED_1': {
+							de: 'Vollendung der Grundschule',
+							en: 'Completion of primary education',
+						},
+						'ISCED_2': {
+							de: 'Haupt- / Realschulabschluss',
+							en: 'Secondary school leaving certificate',
+						},
 						'ISCED_3': { de: 'Abitur' },
 						'ISCED_4': { de: 'Fachhochschulreife / Fachabitur' },  // {de: 'Fachhochschulreife / Fachgebundene Hochschulreife(Fachabitur)'},
 						'ISCED_5': { de: 'Meister' },
-						'ISCED_6': { de: 'Bachelor / Diplom(FH)' },
-						'ISCED_7': { de: 'Master / Diplom(Uni)' },
-						'ISCED_8': { de: 'Doktorat / PhD' },
-					}
-				},
-				good_communication_in_english: {
-					question: { de: 'Kannst du dich gut auf Englisch verständigen?' },
-					why: { de: 'Als internationale Organisation wird viel auf Englisch kommuniziert. Hiermit möchten wir schauen, ob mehr in die einzelnen Sprachen übersetzt werden sollte.' },
-					type: 'radio',
-					options: {
-						'yes': {
-							de: 'Ja',
-							en: 'Yes',
+						'ISCED_6': {
+							de: 'Bachelor / Diplom (FH)',
+							en: 'Bachelor / Diploma (FH)',
 						},
-						'no': {
-							de: 'Nein',
-							en: 'No',
+						'ISCED_7': {
+							de: 'Master / Diplom (Uni)',
+							en: 'Master / Diploma (Uni)',
+						},
+						'ISCED_8': {
+							de: 'Doktorat / PhD',
+							en: 'Doctorate / PhD',
 						},
 					}
 				},
-				problems_with_computers: {
-					question: { de: 'Hast du gelegentlich/oft Probleme dich am Computer oder Handy zurecht zu finden?' },
-					why: { de: 'Wir schauen hiermit, wie viel wir innerhalb von Volt auf technische Lösungen setzten können?' },
-					type: 'radio',
-					options: {
-						'yes': { de: '(Eher) Ja' },
-						'no': { de: '(Eher) Nein' },
-						'depends': { de: 'Kommt drauf an (Gerät, Betriebsystem, Anwendung,…)' },
-					}
-				},
-			}
-		},
-		{
-			color: '#FDC220',
-			heading: { de: 'Kultur' },
-			questions: {
 				amount_of_kown_languages: {
 					question: { de: 'Wie viele Sprachen kannst du sprechen/verstehen?' },
 					why: { de: 'Austausch über die eigene Sprach-Bubble hinaus.' },
@@ -251,7 +241,10 @@ const _DATA_ = {
 		},
 		{
 			color: '#E63E12',
-			heading: { de: 'Diskriminierung' },
+			heading: {
+				de: 'Diskriminierung',
+				en: 'Discrimination',
+			},
 			questions: {
 				discriminatory_experiences: {
 					question: { de: 'In welchen Bereichen hast du schonmal diskriminierende Erfahrungen gemacht?' },
@@ -315,8 +308,11 @@ const _DATA_ = {
 			},
 		},
 		{
-			color: '#1BBE6F',
-			heading: { de: 'LGBTQ*' },
+			color: '#FDC220',
+			heading: {
+				de: 'LGBTIAQ+',
+				en: 'LGBTIAQ+',
+			},
 			questions: {
 				gender: {
 					question: { de: 'Wie bezeichnest du dein Gender?' },
@@ -361,7 +357,10 @@ const _DATA_ = {
 		},
 		{
 			color: '#82D0F4',
-			heading: { de: 'Psyche' },
+			heading: {
+				de: 'Mentale Gesundheit',
+				en: 'Mental Health',
+			},
 			questions: {
 				psychological_difficulties: {
 					question: { de: 'Hast du (unabhängig von einer psychiatrischen Diagnose) mit anhaltenden oder immer wiederkehrenden psychischen Schwierigkeiten zu tun haben?' },
@@ -415,8 +414,11 @@ const _DATA_ = {
 			},
 		},
 		{
-			color: '#502379',
-			heading: { de: 'Hilfsmittel' },
+			color: '#1BBE6F',
+			heading: {
+				de: 'Hilfsmittel',
+				en: 'Assistive Technology',
+			},
 			questions: {
 				everyday_aids: {
 					question: { de: 'Welche Hilfsmittel benötigst du im Alltag?' },
@@ -433,6 +435,52 @@ const _DATA_ = {
 						'orthosis': { de: 'Orthese' },
 
 						'other': { de: 'andere Hilfsmittel' }, // (Screenreader, Brailledisplay, …)
+					}
+				},
+				good_communication_in_english: {
+					question: {
+						de: 'Kannst du dich gut auf Englisch verständigen?',
+						en: 'Can you communicate well in English?',
+					},
+					why: {
+						de: 'Als internationale Organisation wird viel auf Englisch kommuniziert. Hiermit möchten wir schauen, ob mehr in die einzelnen Sprachen übersetzt werden sollte.',
+						en: 'As an international organization, a lot is communicated in English. Here we want to see if more should be translated into the individual languages.',
+					},
+					type: 'radio',
+					options: {
+						'yes': {
+							de: 'Ja',
+							en: 'Yes',
+						},
+						'no': {
+							de: 'Nein',
+							en: 'No',
+						},
+					}
+				},
+				problems_with_computers: {
+					question: {
+						de: 'Hast du gelegentlich/oft Probleme dich am Computer oder Handy zurecht zu finden?',
+						en: 'Do you occasionally/often have problems finding your way around on a computer or smartphone?',
+					},
+					why: {
+						de: 'Wir schauen hiermit, wie viel wir innerhalb von Volt auf technische Lösungen setzten können?',
+						en: 'We are looking here to see how much we can rely on technical solutions within Volt.',
+					},
+					type: 'radio',
+					options: {
+						'yes': {
+							de: '(Eher) Ja',
+							en: '(Rather) Yes',
+						},
+						'no': {
+							de: '(Eher) Nein',
+							en: '(Rather) No',
+						},
+						'depends': {
+							de: 'Kommt drauf an (Gerät, Betriebsystem, Anwendung,…)',
+							en: 'Depends (device, operating system, application,…)',
+						},
 					}
 				},
 				financial_help: {
@@ -454,8 +502,14 @@ const _DATA_ = {
 		},
 		{
 			color: '#502379',
-			heading: { de: 'Verbesserung der Umfrage' },
-			intro: { de: 'Die ist unsere erste Umfrage dieser Art. Hier kannst du uns helfen diese weiter zu entwickeln …' },
+			heading: {
+				de: 'Verbesserung der Umfrage',
+				en: 'Improving the Survey',
+			},
+			intro: {
+				de: 'Die ist unsere erste Umfrage dieser Art. Hier kannst du uns helfen diese weiter zu entwickeln …',
+				en: 'This is our first survey of this kind. Here you can help us to improve it …',
+			},
 			questions: {
 				text_whats_missing: {
 					question: { de: 'Welche Merkmale fehlen Deiner Meinung nach hier, sind aber aus Deiner Sicht für Diversität in Volt wichtig?' },
