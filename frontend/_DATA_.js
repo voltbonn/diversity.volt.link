@@ -45,8 +45,8 @@ const _DATA_ = {
 		// voluntary_metadata_description: {de: 'Jeweils das Land und/oder das Städteteam in dem du am aktivsten&nbsp;bist.'},
 
 		button_sourcecode: {
-			de: 'Quellcode auf GitHub anschauen',
-			en: 'View the code on GitHub',
+			de: 'Quellcode',
+			en: 'Sourcecode',
 		},
 		button_imprint: {
 			de: 'Impressum',
