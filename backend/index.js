@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-// const getMongoDbContext = require('./getMongoDbContext.js')
+const getMongoDbContext = require('./getMongoDbContext.js')
 
 // const isDevEnvironment = process.env.environment === 'dev' || false
 const path = require('path')
@@ -287,10 +287,26 @@ app.get('/api/teams.json', function (req, res, next) {
   }
 })
 
-app.post('/api/submit_data', function (req, res, next) {
-  const body = JSON.parse(req.body) || null
-  console.log(body)
-  res.sendStatus(200)
+app.post('/api/save_answer', async function (req, res, next) {
+  const body = req.body
+
+  const answerDoc = {
+    questionKey: body.questionKey || null,
+    answerKey: body.answerKey || null,
+    metadata: {
+      timestamp: new Date(),
+      team_id: body.metadata.team_id || null,
+      team_name: body.metadata.team_name || null,
+      tact: body.metadata.tact || null,
+      relationToVolt: body.metadata.relationToVolt || null,
+    }
+  }
+
+  const mongodb = await getMongoDbContext()
+  const result = await mongodb.collections.answers.insertOne(answerDoc)
+
+  res.send(result)
+  // res.sendStatus(200)
   res.end()
 })
 
