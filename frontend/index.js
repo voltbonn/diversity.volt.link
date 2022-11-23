@@ -262,48 +262,58 @@ function saveMetadataMembership() {
 	}
 }
 
-function submitData(questionKey, answerKey) {
+function submitAnswer({
+	questionKey,
+	answerKey,
+}) {
 
 	const relationToVolt = getRelationToVolt()
 
-	let team = [...teams_selected]
-	if (team.length > 0) {
-		team = team[0]
+	let teams_selected_array = [...teams_selected]
+	console.log('teams_selected_array', teams_selected_array)
 
-		const data = {
-			questionKey,
-			answerKey,
-			metadata: {
-				relationToVolt,
-				team: window.volt_team,
-				timestamp: new Date() * 1,
-				tact: getTimelessButAnonymousTrackingCode({
-					identifier: getIdentifier(),
-					team,
-					questionKey,
-				}),
-			},
-		}
+	teams_selected_array = [
+		{ id: 1, name: 'Team 1' },
+	]
+	if (teams_selected_array.length > 0) {
 
+		for (const team of teams_selected_array) {
+			const team_id = team.id
+			const team_name = team.name
 
-		// send data to post: /api/submit_data using fetch
-		fetch('/api/submit_data', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		}).then(response => {
-			if (response.status === 200) {
-				return response.json()
-			} else {
-				throw new Error('Something went wrong on api server!');
+			const data = {
+				questionKey,
+				answerKey,
+				metadata: {
+					relationToVolt,
+					team_id,
+					team_name,
+					tact: getTimelessButAnonymousTrackingCode({
+						questionKey,
+						team_id,
+						identifier: getIdentifier(),
+					}),
+				},
 			}
-		}).then(response => {
-			console.debug(response);
-		}).catch(error => {
-			console.error(error);
-		})
+
+			fetch('/api/save_answer', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			}).then(response => {
+				if (response.status === 200) {
+					return response.json()
+				} else {
+					throw new Error('Something went wrong on api server!');
+				}
+			}).then(response => {
+				console.debug(response);
+			}).catch(error => {
+				console.error(error);
+			})
+		}
 	}
 }
 
@@ -324,6 +334,11 @@ function clearForm() {
 
 function submitForm() {
 	console.log('relationToVolt', relationToVolt)
+
+	submitAnswer({
+		questionKey: 'test-question',
+		answerKey: 'test-answer',
+	})
 }
 
 function initSubmit() {
