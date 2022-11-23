@@ -519,7 +519,7 @@ const _DATA_ = {
 				},
 				financial_help: {
 					question: { de: 'Bekommst du finanzielle Hilfe. (Bafög, Hartz4, Jugendamt, …)' },
-					why: { de: 'Je nach verfügbarer Geldmenge kann man einfacher an bestimmten Events teilnehmen.' },
+					why: { de: 'Je nach verfügbarer Geldmenge kann man meist einfacher an bestimmten Events teilnehmen.' },
 					type: 'radio',
 					options: {
 						'yes': {
